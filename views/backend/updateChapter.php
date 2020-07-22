@@ -27,7 +27,13 @@ if (
             $chapterTitle = strip_tags($_POST['title']);
             $chapterContent = strip_tags($_POST['content']);
 
-            $chapterManager->update($chapterId, $numChapter, $chapterTitle, $chapterContent);
+            $update = new Chapter([
+                'id'            => $chapterId,
+                'num_chapter'   => $numChapter,
+                'title'         => $chapterTitle,
+                'content'       => $chapterContent
+            ]);
+            $chapterManager->update($update);
 
             $_SESSION['message'] = "Chapitre modifié";
             header('Location: ../../index.php');

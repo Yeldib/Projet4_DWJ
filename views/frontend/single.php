@@ -12,7 +12,25 @@ $chapter = $chapterManager->get($_GET['chapter_id']);
 $commentManager = new CommentManager;
 $comments = $commentManager->getById($_GET['chapter_id']);
 
-$commentManager->insert();
+// Insertion d'un commentaire avec conditions
+if (!empty($_POST)) {
+    if (!empty($_POST['author']) && !empty($_POST['comment'])) {
+
+        $chapterId = htmlspecialchars($_GET['chapter_id']);
+        $insertAuthor = htmlspecialchars($_POST['author']);
+        $insertComment = nl2br(htmlspecialchars($_POST['comment']));
+
+        $insert = new Comment([
+            'chapter_id'    => $chapterId,
+            'author'        => $insertAuthor,
+            'comment'       => $insertComment
+        ]);
+        $commentManager->insert($insert);
+        header('location: single.php?chapter_id=' . $_GET['chapter_id']);
+    } else {
+        // message d'erreur;
+    }
+}
 
 ?>
 <!DOCTYPE html>

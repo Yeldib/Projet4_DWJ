@@ -45,7 +45,7 @@ $chapters = $chapterManager->getList();
                             <strong class="d-inline-block mb-2 text-primary"><?= $chapter->getNumChapter() ?></strong>
                             <h3 class="mb-0"><?= $chapter->getTitle() ?></h3>
                             <div class="mb-1 text-muted"><?= $chapter->getCreatedAt() ?></div>
-                            <p class="card-text mb-auto"><?= $chapter->getContent() ?></p>
+                            <p class="card-text mb-auto"><?= substr($chapter->getContent(), 0, 150) ?>... </p>
                             <a href="views/frontend/single.php?chapter_id=<?= $chapter->getId() ?>" class="stretched-link">Lire la suite...</a>
                         </div>
                         <div class="col-auto d-none d-lg-block">

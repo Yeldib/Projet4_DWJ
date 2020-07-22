@@ -71,23 +71,21 @@ class ChapterManager
         ]);
     }
 
+
     /**
-     * Modifie un chapitre
+     * Modification d'un chapitre
      *
-     * @param [type] $chapterId
-     * @param [type] $numChapter
-     * @param [type] $chapterTitle
-     * @param [type] $chapterContent
+     * @param Chapter $update
      * 
      */
-    public function update($chapterId, $numChapter, $chapterTitle, $chapterContent)
+    public function update(Chapter $update)
     {
         $req = $this->db->prepare("UPDATE chapters SET num_chapter=:num_chapter, title=:title , content=:content, created_at= NOW() WHERE id=:id ");
         $req->execute([
-            'id'            => $chapterId,
-            'num_chapter'   => $numChapter,
-            'title'         => $chapterTitle,
-            'content'       => $chapterContent
+            'id'            => $update->getId(),
+            'num_chapter'   => $update->getNumChapter(),
+            'title'         => $update->getTitle(),
+            'content'       => $update->getContent()
         ]);
     }
 

@@ -31,7 +31,6 @@ class CommentManager
      */
     public function getById($id)
     {
-
         $comments = [];
         $req = $this->db->prepare('SELECT * FROM comments WHERE chapter_id = :chapter_id');
         $req->execute(['chapter_id' => $id]);
@@ -42,28 +41,19 @@ class CommentManager
     }
 
     /**
-     * Insère un commentaire dans la base de données
+     * Insère un commentaire 
      *
-     * @return void
+     * @param Comment $insert
+     * 
      */
-    public function insert()
+    public function insert(Comment $insert)
     {
-        if (!empty($_POST)) {
-
-            if (!empty($_POST['author']) && !empty($_POST['comment'])) {
-
-                $req = $this->db->prepare('INSERT INTO comments(chapter_id, author, comment, created_at) VALUES(:chapter_id, :author, :comment, NOW())');
-                $req->execute(array(
-
-                    'chapter_id'    => htmlspecialchars($_GET['chapter_id']),
-                    'author'        => htmlspecialchars($_POST['author']),
-                    'comment'       => nl2br(htmlspecialchars($_POST['comment']))
-                ));
-                header('location: ../views/chapterView.php?chapter_id=' . $_GET['chapter_id'] . '');
-            } else {
-                // message d'erreur;
-            }
-        }
+        $req = $this->db->prepare('INSERT INTO comments(chapter_id, author, comment, created_at) VALUES(:chapter_id, :author, :comment, NOW())');
+        $req->execute([
+            'chapter_id'    => $insert->getChapterId(),
+            'author'        => $insert->getAuthor(),
+            'comment'       => $insert->getComment()
+        ]);
     }
 
     /**
