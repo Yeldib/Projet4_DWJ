@@ -12,7 +12,7 @@ $chapter = $chapterManager->get($_GET['chapter_id']);
 $commentManager = new CommentManager;
 $comments = $commentManager->getById($_GET['chapter_id']);
 
-// Insertion d'un commentaire avec conditions
+// Insertion d'un commentaire
 if (!empty($_POST)) {
     if (!empty($_POST['author']) && !empty($_POST['comment'])) {
 
@@ -32,6 +32,17 @@ if (!empty($_POST)) {
     }
 }
 
+// Signale un commentaire
+if (
+    isset($_POST['report'])
+    && !empty($_POST['report'])
+    && (int) $_POST['report']
+) {
+
+    $commentManager->report($_POST['report']);
+    // echo "signalé";
+}
+
 ?>
 <!DOCTYPE html>
 <html lang="fr">
@@ -39,6 +50,7 @@ if (!empty($_POST)) {
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <script src="https://kit.fontawesome.com/f12ce41413.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
     <title>Chaptitre <?= $chapter->getTitle() ?></title>
 </head>
@@ -103,7 +115,8 @@ if (!empty($_POST)) {
                 <?php if (count($comments) === 0) : ?>
                     <p>Il n'y a pas de commentaires ... SOYEZ LE PREMIER !</p>
                 <?php else : ?>
-                    <em>Il y a déjà <?= count($comments) ?> réactions : </em>
+                    <em>Il y a déjà <?= count($comments) ?> réactions : </em><br>
+                    <hr>
                     <?php foreach ($comments as $comment) : ?>
                         <p>
                             <strong>Commentaire de <?= $comment->getAuthor() ?></strong>
@@ -113,7 +126,12 @@ if (!empty($_POST)) {
                         <blockquote>
                             <em><?= $comment->getComment() ?></em><br>
                         </blockquote>
-                        <a href="#">signaler</a>
+
+                        <form method="post">
+                            <input type="hidden" name="report" value="<?= $comment->getId() ?>">
+                            <button class="btn btn-light font-italic"><i class="fas fa-exclamation-triangle"></i> Signaler</button>
+                            <hr>
+                        </form>
                     <?php endforeach ?>
                 <?php endif ?>
             </div>

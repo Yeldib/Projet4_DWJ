@@ -1,0 +1,13 @@
+.bg-image-home {
+    background-image: url("../../public/images/img_couv.jpg");
+    height: 450px;
+}
+
+#position-num-chapter {
+    font-style: italic;
+    font-size: 1.7rem;
+    color: white;
+    position: absolute;
+    top: 112px;
+    right: 47px;
+}

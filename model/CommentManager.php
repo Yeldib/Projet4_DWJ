@@ -71,4 +71,33 @@ class CommentManager
         }
         return $comments;
     }
+
+    /**
+     * Signale un commentaire
+     *
+     * @param [type] $id
+     * 
+     */
+    public function report($id)
+    {
+        $req = $this->db->prepare('UPDATE comments SET report= 1 WHERE id = ?');
+        $req->execute([
+            $id
+        ]);
+    }
+
+    /**
+     * Supprime un commentaire
+     *
+     * @param [type] $id
+     * 
+     */
+    public function delete($id)
+    {
+        $req = $this->db->prepare('DELETE FROM comments WHERE id = ?');
+        $req->execute([
+            $id
+        ]);
+        $req->execute();
+    }
 }

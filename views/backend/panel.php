@@ -10,6 +10,26 @@ $comments = $commentManager->getList();
 $chapterManager = new ChapterManager;
 $chapters = $chapterManager->getList();
 
+// Suppression d'un chapitre
+if (
+    isset($_GET['chapter_id'])
+    && !empty($_GET['chapter_id'])
+    && (int) $_GET['chapter_id']
+) {
+
+    $chapterManager->delete($_GET['chapter_id']);
+}
+
+// Suppression d'un commentaire
+if (
+    isset($_GET['id'])
+    && !empty($_GET['id'])
+    && (int) $_GET['id']
+) {
+
+    $commentManager->delete($_GET['id']);
+}
+
 ?>
 
 <!DOCTYPE html>
@@ -36,13 +56,24 @@ $chapters = $chapterManager->getList();
                             <th>Pseudo</th>
                             <th>Commentaires</th>
                             <th>Actions</th>
+                            <th>Signalement</th>
                         </thead>
                         <tbody>
                             <?php foreach ($comments as $comment) { ?>
                                 <tr>
                                     <td><?= $comment->getAuthor() ?></td>
                                     <td><?= $comment->getComment() ?></td>
-                                    <td></td>
+                                    <td>
+                                        <a href="panel.php?id=<?= $comment->getId() ?>">Supprimer</a>
+                                    </td>
+                                    <td>
+                                        <?php if ($comment->getReport() == 1) { ?>
+                                            <p>Oui</p>
+                                        <?php } else { ?>
+                                            <p>non</p>
+                                        <?php } ?>
+
+                                    </td>
                                 </tr>
                         </tbody>
                     <?php } ?>
@@ -70,7 +101,7 @@ $chapters = $chapterManager->getList();
                                     <td>
                                         <a href="../frontend/single.php?chapter_id=<?= $chapter->getId() ?>">Voir</a> |
                                         <a href="updateChapter?chapter_id=<?= $chapter->getId() ?>">Modifier</a> |
-                                        <a href="deleteChapter.php?chapter_id=<?= $chapter->getId() ?>">Supprimer</a>
+                                        <a href="panel.php?chapter_id=<?= $chapter->getId() ?>">Supprimer</a>
                                     </td>
                                 </tr>
                         </tbody>
