@@ -55,19 +55,20 @@ class ChapterManager
         return new Chapter($chapter);
     }
 
+
     /**
      * Insère un chapitre dans la base de données
      *
-     * @param [type] $chapter
-     * 
+     * @param Chapter $chapter
+     *
      */
-    public function add($chapter)
+    public function add(Chapter $chapter)
     {
         $req = $this->db->prepare("INSERT INTO chapters(num_chapter, title, content, created_at) VALUES (:num_chapter, :title, :content, NOW())");
         $req->execute([
-            'num_chapter' => $chapter->getNumChapter(),
-            'title' => $chapter->getTitle(),
-            'content' => $chapter->getContent()
+            'num_chapter'   => $chapter->getNumChapter(),
+            'title'         => $chapter->getTitle(),
+            'content'       => $chapter->getContent()
         ]);
     }
 
