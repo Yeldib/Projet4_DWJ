@@ -17,8 +17,8 @@
             </div>
         </div>
     <?php } else { ?>
-        <?= $_SESSION['error'] = "URL INVALIDE";
-        header('Location: ../index.php');
+        <?= $_SESSION['flash'] = "URL INVALIDE";
+        // header('Location: ../index.php');
         ?>
     <?php } ?>
 </div>

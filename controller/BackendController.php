@@ -42,6 +42,7 @@ class BackendController
      */
     public function create()
     {
+
         // Ajout d'un chapitre avec des vérifications
         if (!empty($_POST)) {
 
@@ -63,12 +64,9 @@ class BackendController
                 ]);
                 $chapterManager = new ChapterManager;
                 $chapterManager->add($chapter);
-
-
-                // $_SESSION['message'] = "Chapitre publié";
-                header('Location: index.php?action=home');
+                // Chapitre enregistré
             } else {
-                // $_SESSION['error'] = "Champs incomplet";
+                // Champs mal rempli
             }
         }
 

@@ -4,10 +4,11 @@
 }
 
 #position-num-chapter {
+    font-family: 'Meddon', cursive;
     font-style: italic;
-    font-size: 1.7rem;
-    color: white;
+    font-size: 1.4rem;
+    color: black;
     position: absolute;
-    top: 112px;
-    right: 47px;
+    top: 121px;
+    right: 29px;
 }

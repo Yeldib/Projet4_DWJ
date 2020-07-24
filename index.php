@@ -23,6 +23,8 @@ if (isset($_GET['action'])) {
         $frontend->home();
     } elseif ($_GET['action'] == 'single') {
         $frontend->single();
+    } elseif ($_GET['action'] == 'userRegister') {
+        $frontend->userRegister();
     } elseif ($_GET['action'] == 'panel') {
         $backend->panel();
     } elseif ($_GET['action'] == 'create') {

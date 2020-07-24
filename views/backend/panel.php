@@ -41,6 +41,7 @@
 </section>
 
 <h2>Liste des chapitres</h2>
+<a href="index.php?action=create" class="btn btn-primary">Rédiger un chapitre</a><br><br>
 
 <section class="container">
     <div class="row">
@@ -65,7 +66,7 @@
                 </tbody>
             <?php } ?>
             </table>
-            <a href="index.php?action=create" class="btn btn-primary">Rédiger un chapitre</a>
+
         </div>
     </div>
 </section>

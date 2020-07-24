@@ -3,9 +3,11 @@
 <?php $title = "Page d'accueil du blog de Jean Forteroche" ?>
 
 <!-- Hero -->
+
 <div class="jumbotron p-4 p-md-5 text-white rounded bg-image-home">
     <div class="col-md-6 px-0">
-        <h1 class="display-4 font-italic">Billet simple pour l'Alaska de Jean Forteroche</h1>
+        <h1 class="display-4 font-italic">Billet simple pour l'Alaska </h1><br>
+        <p><em>de Jean Forteroche</em></p>
     </div>
 </div>
 
@@ -19,7 +21,7 @@
                     <h3 class="mb-0"><?= $chapter->getTitle() ?></h3>
                     <div class="mb-1 text-muted"><?= $chapter->getCreatedAt() ?></div>
                     <p class="card-text mb-auto"><?= substr($chapter->getContent(), 0, 150) ?>... </p>
-                    <a href="index.php?action=single&chapter_id=<?= $chapter->getId() ?>" class="stretched-link">Lire la suite...</a>
+                    <a href="index.php?action=single&chapter_id=<?= $chapter->getId() ?>" class="text-muted">Lire la suite...</a>
                 </div>
                 <div class="col-auto d-none d-lg-block">
                     <figure class="pos-relative-figure">
