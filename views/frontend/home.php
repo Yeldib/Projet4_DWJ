@@ -3,7 +3,6 @@
 <?php $title = "Page d'accueil du blog de Jean Forteroche" ?>
 
 <!-- Hero -->
-
 <div class="jumbotron p-4 p-md-5 text-white rounded bg-image-home">
     <div class="col-md-6 px-0">
         <h1 class="display-4 font-italic">Billet simple pour l'Alaska </h1><br>
@@ -11,8 +10,8 @@
     </div>
 </div>
 
+<!-- Affiche tous les chapitres -->
 <div class="row mb-2">
-    <!-- Affiche tous les chapitres -->
     <?php foreach ($chapters as $chapter) { ?>
         <div class="col-md-6">
             <div class="row no-gutters border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
@@ -32,7 +31,6 @@
             </div>
         </div>
     <?php } ?>
-</div>
 </div>
 
 <?php $pageContent = ob_get_clean(); ?>

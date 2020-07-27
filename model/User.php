@@ -6,6 +6,7 @@ class user
     private $pseudo;
     private $pass;
     private $email;
+    private $roles;
 
     public function __construct(array $data)
     {
@@ -26,6 +27,9 @@ class user
         }
         if (isset($data['email'])) {
             $this->setEmail($data['email']);
+        }
+        if (isset($data['roles'])) {
+            $this->setRoles($data['roles']);
         }
     }
 
@@ -105,6 +109,31 @@ class user
     public function setEmail($email)
     {
         $this->email = $email;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of roles
+     */
+    public function getRoles()
+    {
+        if ($this->roles == null)
+            $roles = 'ROLE_USER';
+        else
+            $roles = $this->roles;
+
+        return $roles;
+    }
+
+    /**
+     * Set the value of roles
+     *
+     * @return  self
+     */
+    public function setRoles($roles)
+    {
+        $this->roles = $roles;
 
         return $this;
     }

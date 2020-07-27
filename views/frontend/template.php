@@ -21,9 +21,12 @@
                     <a class="p-2 text-muted" href="index.php?action=home">Accueil</a>
                     <a class="p-2 text-muted" href="#">À propos de l'auteur</a>
                     <?php if (isset($_SESSION['id'])) { ?>
-                        <a class="btn btn-sm btn-outline-secondary" href="#">Deconnexion</a>
+                        <a class="btn btn-sm btn-outline-secondary" href="views\frontend\signOut.php">Deconnexion</a>
+                        <?php if ($_SESSION['roles'] === 'ROLE_ADMIN') { ?>
+                            <a class="btn btn-primary" href="index.php?action=panel">Administration</a>
+                        <?php } ?>
                     <?php } else { ?>
-                        <a class="btn btn-sm btn-outline-secondary" href="#">Connexion</a>
+                        <a class="btn btn-sm btn-outline-secondary" href="index.php?action=connexion">Connexion</a>
                     <?php } ?>
                 </nav>
             </div>

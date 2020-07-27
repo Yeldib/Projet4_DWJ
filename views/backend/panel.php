@@ -3,6 +3,7 @@
 
 
 <h1>Page de modération</h1>
+<p><?= "Bonjour " .  $_SESSION['pseudo'] ?></p>
 
 <h2>Liste des commentaires</h2>
 
@@ -60,7 +61,7 @@
                             <td>
                                 <a href="views/frontend/single.php?chapter_id=<?= $chapter->getId() ?>">Voir</a> |
                                 <a href="index.php?action=update&chapter_id=<?= $chapter->getId() ?>">Modifier</a> |
-                                <a href="index.php?action=panel&chapter_id=<?= $chapter->getId() ?>" onclick="confirm('Supprimer ce commentaire ?')">Supprimer</a>
+                                <a href="index.php?action=panel&chapter_id=<?= $chapter->getId() ?>" onclick="return confirm('Supprimer ce commentaire ?')">Supprimer</a>
                             </td>
                         </tr>
                 </tbody>

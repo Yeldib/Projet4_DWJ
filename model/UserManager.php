@@ -20,13 +20,35 @@ class UserManager
         }
     }
 
+    /**
+     * Ajoute un nouveau membre dans la base de données
+     *
+     * @param User $user
+     */
     public function add(User $user)
     {
-        $req = $this->db->prepare("INSERT INTO users(pseudo, pass, email) VALUES(:pseudo, :pass, :email)");
+        $req = $this->db->prepare("INSERT INTO users(pseudo, pass, email, roles) VALUES(:pseudo, :pass, :email, :roles)");
         $req->execute([
             'pseudo' => $user->getPseudo(),
             'pass' => $user->getPass(),
-            'email' => $user->getEmail()
+            'email' => $user->getEmail(),
+            'roles' => $user->getRoles()
         ]);
+    }
+
+    /**
+     * Vérifie si le pseudo existe dans la base de données
+     * @param User $user
+     * @return $result
+     */
+    public function findByPseudo(User $user)
+    {
+        $req = $this->db->prepare("SELECT * FROM users WHERE pseudo = :pseudo");
+        $req->execute([
+            'pseudo' => $user->getPseudo()
+        ]);
+
+        $result = $req->fetch();
+        return new User($result);
     }
 }

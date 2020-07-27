@@ -8,31 +8,39 @@ class BackendController
      */
     public function panel()
     {
-        $commentManager = new CommentManager;
-        $comments = $commentManager->getList();
+        // Pour afficher cette page il faut vérifier si l'utilisateur est ADMIN
+        if (isset($_SESSION['id']) && $_SESSION['roles'] === 'ROLE_ADMIN') {
 
-        $chapterManager = new ChapterManager;
-        $chapters = $chapterManager->getList();
+            $commentManager = new CommentManager;
+            $comments = $commentManager->getList();
 
-        // Suppression d'un chapitre
-        if (
-            isset($_GET['chapter_id'])
-            && !empty($_GET['chapter_id'])
-            && (int) $_GET['chapter_id']
-        ) {
+            $chapterManager = new ChapterManager;
+            $chapters = $chapterManager->getList();
 
-            $chapterManager->delete($_GET['chapter_id']);
+            // Suppression d'un chapitre
+            if (
+                isset($_GET['chapter_id'])
+                && !empty($_GET['chapter_id'])
+                && (int) $_GET['chapter_id']
+            ) {
+
+                $chapterManager->delete($_GET['chapter_id']);
+            }
+
+            // Suppression d'un commentaire
+            if (
+                isset($_GET['id'])
+                && !empty($_GET['id'])
+                && (int) $_GET['id']
+            ) {
+
+                $commentManager->delete($_GET['id']);
+            }
+        } else {
+            echo "Page non autorisée";
+            header('Location: index.php?action=home');
         }
 
-        // Suppression d'un commentaire
-        if (
-            isset($_GET['id'])
-            && !empty($_GET['id'])
-            && (int) $_GET['id']
-        ) {
-
-            $commentManager->delete($_GET['id']);
-        }
 
         require_once 'views\backend\panel.php';
     }

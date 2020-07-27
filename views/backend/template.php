@@ -13,8 +13,21 @@
 <body>
 
     <div class="container">
-        <?= $pageContent ?>
-    </div>
+        <div class="container">
+            <header>
+                <div class="nav-scroller py-1 mb-2">
+                    <nav class="nav d-flex justify-content-between">
+                        <a class="btn btn-primary" href="index.php?action=home">Accueil du site</a>
+                        <?php if (isset($_SESSION['id'])) { ?>
+                            <a class="btn btn-sm btn-outline-secondary" href="views/frontend/signOut.php">Deconnexion</a>
+                        <?php } else { ?>
+                            <a class="btn btn-sm btn-outline-secondary" href="index.php?action=connexion">Connexion</a>
+                        <?php } ?>
+                    </nav>
+                </div>
+            </header>
+            <?= $pageContent ?>
+        </div>
 
     </div>
 

@@ -19,7 +19,7 @@ class FrontendController
      *
      * @return void
      */
-    public function userRegister()
+    public function register()
     {
         $userManager = new UserManager;
 
@@ -47,6 +47,47 @@ class FrontendController
             }
         }
         require_once 'views/frontend/userRegister.php';
+    }
+
+    /**
+     * Affiche la page de connexion
+     *
+     * @return void
+     */
+    public function connexion()
+    {
+        $userManager = new UserManager;
+        $session = new Session;
+
+        if (isset($_POST['connexion'])) {
+
+            $pseudoConnexion = htmlspecialchars($_POST['pseudo']);
+            $passConnexion = htmlspecialchars($_POST['pass']);
+
+            $setUser = new User([
+                'pseudo' => $pseudoConnexion,
+                'pass' => $passConnexion
+            ]);
+            $user = $userManager->findByPseudo($setUser);
+
+            $isPassCorrect = password_verify($passConnexion, $user->getPass());
+
+            if (!$user) {
+                echo "Mauvais identifiant ou mot de passe ";
+            } else {
+                if ($isPassCorrect) {
+                    $_SESSION['id'] = $user->getId();
+                    $_SESSION['pseudo'] = $user->getPseudo();
+                    $_SESSION['roles'] = $user->getRoles();
+                    echo "connecté";
+                } else {
+                    $session->setFlash('Mauvais identifiant ou mot de passe');
+                    $session->flash();
+                }
+            }
+        }
+
+        require_once 'views/frontend/signUp.php';
     }
 
     // Affiche un chapitre avec ces commentaires
