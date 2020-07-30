@@ -21,7 +21,6 @@ spl_autoload_register(function ($class) {
 $frontend = new FrontendController;
 $backend = new BackendController;
 
-
 if (isset($_GET['action'])) {
 
     if ($_GET['action'] == 'home') {
@@ -32,6 +31,8 @@ if (isset($_GET['action'])) {
         $frontend->register();
     } elseif ($_GET['action'] == 'connexion') {
         $frontend->connexion();
+    } elseif ($_GET['action'] == 'biography') {
+        $frontend->biography();
     } elseif ($_GET['action'] == 'panel') {
         $backend->panel();
     } elseif ($_GET['action'] == 'create') {

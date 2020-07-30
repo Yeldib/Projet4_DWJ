@@ -6,7 +6,7 @@ class Session
     {
         if (isset($_SESSION['error'])) {
 ?>
-            <div class="alert alert-danger">
+            <div id="flash-msg" class="alert alert-danger mb-0">
                 <a class="close">x</a>
                 <?php echo $_SESSION['error'];
                 unset($_SESSION['error']) ?>
@@ -18,7 +18,7 @@ class Session
     {
         if (isset($_SESSION['valide'])) {
         ?>
-            <div class="alert alert-success">
+            <div id="flash-msg" class="alert alert-success mb-0">
                 <a class="close">x</a>
                 <?php echo $_SESSION['valide'];
                 unset($_SESSION['valide']) ?>

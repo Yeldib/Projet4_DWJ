@@ -12,27 +12,20 @@
     <title> <?= $title ?></title>
 </head>
 
-<body>
+<body id="bg-img-body">
 
-    <div class="container">
-
-        <!-- Message de notification -->
-        <?php
-        Session::flashError();
-        Session::flashValidate();
-        ?>
-
+    <div class="container-fluid pr-0 pl-0">
         <!-- Navbar -->
         <header>
-            <div class="nav-scroller py-0 mb-2 col-12">
-                <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-                    <div class="collapse navbar-collapse" id="navbarColor01">
+            <div class="nav-scroller mb-0 pr-0 pl-0">
+                <nav id="bg-navbar-view" class="navbar navbar-expand-lg navbar-dark">
+                    <div class="navbar-collapse" id="navbarColor01">
                         <ul class="navbar-nav mr-auto">
                             <li class="nav-item active">
                                 <a class="nav-link" href="index.php?action=home">Accueil</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="#">À propos de l'auteur</a>
+                                <a class="nav-link" href="index.php?action=biography">À propos de l'auteur</a>
                             </li>
                         </ul>
                         <?php if (isset($_SESSION['id'])) { ?>
@@ -48,13 +41,19 @@
             </div>
         </header>
 
-        <div class="container">
+        <!-- Message de notification -->
+        <?php
+        Session::flashError();
+        Session::flashValidate();
+        ?>
+
+        <section>
             <?= $pageContent ?>
-        </div>
+        </section>
 
     </div>
 
-    <script src="public/js/main.js"></script>
+    <script src="public\js\main.js"></script>
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>

@@ -31,7 +31,7 @@ class ChapterManager
     public function getList()
     {
         $chapters = [];
-        $req = $this->db->prepare("SELECT * FROM chapters");
+        $req = $this->db->prepare('SELECT id, title, content, num_chapter, DATE_FORMAT(created_at, \'%d/%m/%Y à %Hh%i\') AS created_at FROM chapters ORDER BY created_at DESC');
         $req->execute();
         while ($data = $req->fetch()) {
             $chapters[] = new Chapter($data);
@@ -47,7 +47,7 @@ class ChapterManager
      */
     public function get($id)
     {
-        $req = $this->db->prepare('SELECT * FROM chapters WHERE id = ?');
+        $req = $this->db->prepare('SELECT id, title, content, num_chapter, DATE_FORMAT(created_at, \'%d/%m/%Y à %Hh%i\') AS created_at FROM chapters WHERE id = ?');
         $req->execute([
             $id
         ]);

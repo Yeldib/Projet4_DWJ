@@ -2,13 +2,13 @@
 <?php $title = "Page d'administration" ?>
 
 
-<h1>Page de modération</h1>
+<h1 class="text-center">Page de modération</h1>
 
-<p><em><?= "Bonjour " .  $_SESSION['pseudo'] ?></em></p>
+<p class="text-center"><em><?= "Bonjour " .  $_SESSION['pseudo'] ?></em></p>
 
-<h2>Liste des commentaires</h2>
+<h3 class="text-center mb-5 mt-5">Liste des commentaires</h3>
 
-<section class="container">
+<section class="container text-center">
     <div class="row">
         <div class="col">
             <table class="table">
@@ -24,13 +24,13 @@
                             <td><?= $comment->getAuthor() ?></td>
                             <td><?= $comment->getComment() ?></td>
                             <td>
-                                <a href="index.php?action=panel&id=<?= $comment->getId() ?>" onclick="confirm('Supprimer ce commentaire ?')"><i class="fas fa-trash-alt"></i></a>
+                                <a href="index.php?action=panel&id=<?= $comment->getId() ?>" onclick="return confirm('Supprimer ce commentaire ?')"><i class="fas fa-trash-alt"></i></a>
                             </td>
                             <td>
                                 <?php if ($comment->getReport() == 1) { ?>
-                                    <p>Oui</p>
+                                    <p style="color: red;">Oui</p>
                                 <?php } else { ?>
-                                    <p>non</p>
+                                    <p style="color: green;">non</p>
                                 <?php } ?>
 
                             </td>
@@ -42,10 +42,10 @@
     </div>
 </section>
 
-<h2>Liste des chapitres</h2>
-<a href="index.php?action=create" class="btn btn-primary">Rédiger un chapitre</a><br><br>
+<h3 class="text-center mb-5 mt-5">Liste des chapitres</h3>
+<p class="text-center"><a href="index.php?action=create" class="btn btn-primary">Rédiger un chapitre</a><br><br></p>
 
-<section class="container">
+<section class="container text-center mb-5">
     <div class="row">
         <div class="col">
             <table class="table">

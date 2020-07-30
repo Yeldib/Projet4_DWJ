@@ -44,7 +44,7 @@ class FrontendController
                 $userManager->add($user);
                 $_SESSION['valide'] = "Merci pour votre inscription.";
             } else {
-                echo "Champs mal rempli";
+                $_SESSION['error'] = "Champs mal rempli";
             }
         }
         require_once 'views/frontend/userRegister.php';
@@ -60,29 +60,32 @@ class FrontendController
         $userManager = new UserManager;
 
         if (isset($_POST['connexion'])) {
+            if (!empty($_POST['pseudo']) && !empty($_POST['pass'])) {
+                $pseudoConnexion = htmlspecialchars($_POST['pseudo']);
+                $passConnexion = htmlspecialchars($_POST['pass']);
 
-            $pseudoConnexion = htmlspecialchars($_POST['pseudo']);
-            $passConnexion = htmlspecialchars($_POST['pass']);
+                $setUser = new User([
+                    'pseudo' => $pseudoConnexion,
+                    'pass' => $passConnexion
+                ]);
+                $user = $userManager->findByPseudo($setUser);
 
-            $setUser = new User([
-                'pseudo' => $pseudoConnexion,
-                'pass' => $passConnexion
-            ]);
-            $user = $userManager->findByPseudo($setUser);
+                $isPassCorrect = password_verify($passConnexion, $user->getPass());
 
-            $isPassCorrect = password_verify($passConnexion, $user->getPass());
-
-            if (!$user) {
-                $_SESSION['error'] = "Mauvais identifiant ou mot de passe ";
-            } else {
-                if ($isPassCorrect) {
-                    $_SESSION['id'] = $user->getId();
-                    $_SESSION['pseudo'] = $user->getPseudo();
-                    $_SESSION['roles'] = $user->getRoles();
-                    $_SESSION['valide'] = 'Bonjour ' . $_SESSION['pseudo'];
+                if (!$user) {
+                    $_SESSION['error'] = "Mauvais identifiant ou mot de passe ";
                 } else {
-                    $_SESSION['error'] = 'Mauvais identifiant ou mot de passe';
+                    if ($isPassCorrect) {
+                        $_SESSION['id'] = $user->getId();
+                        $_SESSION['pseudo'] = $user->getPseudo();
+                        $_SESSION['roles'] = $user->getRoles();
+                        $_SESSION['valide'] = 'Bonjour ' . $_SESSION['pseudo'];
+                    } else {
+                        $_SESSION['error'] = 'Mauvais identifiant ou mot de passe';
+                    }
                 }
+            } else {
+                $_SESSION['error'] = 'Veuillez remplir les champs requis.';
             }
         }
 
@@ -113,8 +116,9 @@ class FrontendController
                         'author'        => $insertAuthor,
                         'comment'       => $insertComment
                     ]);
-                    $_SESSION['valide'] = 'Merci pour votre commentaire';
                     $commentManager->insert($insert);
+                    header('Location: index.php?action=single&chapter_id=' . $_GET['chapter_id']);
+                    $_SESSION['valide'] = 'Merci pour votre commentaire';
                 } else {
                     $_SESSION['error'] = 'Champs invalides';
                 }
@@ -131,5 +135,15 @@ class FrontendController
             $_SESSION['error'] = "L'URL est invalide";
             header('location: index.php?action=home');
         }
+    }
+
+    /**
+     * Affiche la biographie de Jean 
+     *
+     * @return void
+     */
+    public function biography()
+    {
+        require_once 'views/frontend/biography.php';
     }
 }

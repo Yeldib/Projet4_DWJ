@@ -4,7 +4,7 @@
 
 <div class="row">
     <div class="col">
-        <h1>Mode édition</h1>
+        <h1 class="text-center">Mode édition</h1>
 
         <form method="post">
             <div class="form-group">

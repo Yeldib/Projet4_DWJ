@@ -32,7 +32,7 @@ class CommentManager
     public function getById($id)
     {
         $comments = [];
-        $req = $this->db->prepare('SELECT * FROM comments WHERE chapter_id = :chapter_id');
+        $req = $this->db->prepare('SELECT id, chapter_id, author, comment, report, DATE_FORMAT(created_at, \'%d/%m/%Y à %Hh%i\') AS created_at FROM comments WHERE chapter_id = :chapter_id ORDER BY created_at');
         $req->execute(['chapter_id' => $id]);
         while ($data = $req->fetch()) {
             $comments[] = new Comment($data);
@@ -64,7 +64,7 @@ class CommentManager
     public function getList()
     {
         $comments = [];
-        $req = $this->db->prepare("SELECT * FROM comments");
+        $req = $this->db->prepare("SELECT * FROM comments LIMIT 5");
         $req->execute();
         while ($data = $req->fetch()) {
             $comments[] = new Comment($data);

@@ -21,9 +21,9 @@
 
         <!-- Navbar -->
         <header>
-            <div class="nav-scroller py-0 mb-5 col-12">
-                <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-                    <div class="collapse navbar-collapse" id="navbarColor01">
+            <div class="nav-scroller mb-5 ">
+                <nav class="navbar navbar-expand-lg navbar-expand-sm navbar-expand-md navbar-dark bg-dark">
+                    <div class="navbar-collapse" id="navbarColor01">
                         <ul class="navbar-nav mr-auto">
                             <li class="nav-item active">
                                 <a class="nav-link" href="index.php?action=home">Accueil du site</a>
@@ -42,9 +42,8 @@
             </div>
         </header>
 
-        <div class="container">
-            <?= $pageContent ?>
-        </div>
+        <?= $pageContent ?>
+
 
     </div>
 
