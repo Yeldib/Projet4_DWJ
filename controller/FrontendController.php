@@ -42,6 +42,7 @@ class FrontendController
                     'email' => $email
                 ]);
                 $userManager->add($user);
+                $_SESSION['valide'] = "Merci pour votre inscription.";
             } else {
                 echo "Champs mal rempli";
             }
@@ -57,7 +58,6 @@ class FrontendController
     public function connexion()
     {
         $userManager = new UserManager;
-        $session = new Session;
 
         if (isset($_POST['connexion'])) {
 
@@ -73,16 +73,15 @@ class FrontendController
             $isPassCorrect = password_verify($passConnexion, $user->getPass());
 
             if (!$user) {
-                echo "Mauvais identifiant ou mot de passe ";
+                $_SESSION['error'] = "Mauvais identifiant ou mot de passe ";
             } else {
                 if ($isPassCorrect) {
                     $_SESSION['id'] = $user->getId();
                     $_SESSION['pseudo'] = $user->getPseudo();
                     $_SESSION['roles'] = $user->getRoles();
-                    echo "connecté";
+                    $_SESSION['valide'] = 'Bonjour ' . $_SESSION['pseudo'];
                 } else {
-                    $session->setFlash('Mauvais identifiant ou mot de passe');
-                    $session->flash();
+                    $_SESSION['error'] = 'Mauvais identifiant ou mot de passe';
                 }
             }
         }
@@ -114,25 +113,22 @@ class FrontendController
                         'author'        => $insertAuthor,
                         'comment'       => $insertComment
                     ]);
+                    $_SESSION['valide'] = 'Merci pour votre commentaire';
                     $commentManager->insert($insert);
-
-                    // message de validation
-                    header('location: index.php?action=single&chapter_id=' . $_GET['chapter_id']);
                 } else {
-                    // msg erreur
+                    $_SESSION['error'] = 'Champs invalides';
                 }
             }
 
             // Signale un commentaire
             if (isset($_POST['report'])) {
-
                 $commentManager->report($_POST['report']);
-                // $session->setFlash('votre message a bien été signalé', 'success');
-                // $session->flash();
+                unset($_SESSION['error']);
+                $_SESSION['valide'] = 'Le message a bien été signalé';
             }
-
             require_once 'views/frontend/single.php';
         } else {
+            $_SESSION['error'] = "L'URL est invalide";
             header('location: index.php?action=home');
         }
     }

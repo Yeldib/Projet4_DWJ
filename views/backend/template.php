@@ -4,6 +4,7 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <script src="https://kit.fontawesome.com/f12ce41413.js" crossorigin="anonymous"></script>
     <script src="https://cdn.tiny.cloud/1/th66f2zf09ao7uqyjdg67jo3iq5bys29vb81bw089m2g993q/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
     <link rel="stylesheet" href="public/css/style.css">
@@ -13,19 +14,35 @@
 <body>
 
     <div class="container">
-        <div class="container">
-            <header>
-                <div class="nav-scroller py-1 mb-2">
-                    <nav class="nav d-flex justify-content-between">
-                        <a class="btn btn-primary" href="index.php?action=home">Accueil du site</a>
+
+        <!-- Message de notification -->
+        <?php Session::flashError();
+        Session::flashValidate(); ?>
+
+        <!-- Navbar -->
+        <header>
+            <div class="nav-scroller py-0 mb-5 col-12">
+                <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+                    <div class="collapse navbar-collapse" id="navbarColor01">
+                        <ul class="navbar-nav mr-auto">
+                            <li class="nav-item active">
+                                <a class="nav-link" href="index.php?action=home">Accueil du site</a>
+                            </li>
+                        </ul>
                         <?php if (isset($_SESSION['id'])) { ?>
-                            <a class="btn btn-sm btn-outline-secondary" href="views/frontend/signOut.php">Deconnexion</a>
+                            <a class="btn btn-outline-light btn-sm my-2 my-sm-0" href="views\frontend\signOut.php">Deconnexion</a>
+                            <?php if ($_SESSION['roles'] === 'ROLE_ADMIN') { ?>
+                                <a class="btn btn-outline-light btn-sm my-2 my-sm-0 ml-3" href="index.php?action=panel">Administration</a>
+                            <?php } ?>
                         <?php } else { ?>
-                            <a class="btn btn-sm btn-outline-secondary" href="index.php?action=connexion">Connexion</a>
+                            <a class="btn btn-outline-success btn-sm my-2 my-sm-0" href="index.php?action=connexion">Connexion</a>
                         <?php } ?>
-                    </nav>
-                </div>
-            </header>
+                    </div>
+                </nav>
+            </div>
+        </header>
+
+        <div class="container">
             <?= $pageContent ?>
         </div>
 

@@ -3,7 +3,8 @@
 
 
 <h1>Page de modération</h1>
-<p><?= "Bonjour " .  $_SESSION['pseudo'] ?></p>
+
+<p><em><?= "Bonjour " .  $_SESSION['pseudo'] ?></em></p>
 
 <h2>Liste des commentaires</h2>
 
@@ -15,7 +16,7 @@
                     <th>Pseudo</th>
                     <th>Commentaires</th>
                     <th>Actions</th>
-                    <th>Signalement</th>
+                    <th>Signalé</th>
                 </thead>
                 <tbody>
                     <?php foreach ($comments as $comment) { ?>
@@ -23,7 +24,7 @@
                             <td><?= $comment->getAuthor() ?></td>
                             <td><?= $comment->getComment() ?></td>
                             <td>
-                                <a href="index.php?action=panel&id=<?= $comment->getId() ?>" onclick="confirm('Supprimer ce commentaire ?')">Supprimer</a>
+                                <a href="index.php?action=panel&id=<?= $comment->getId() ?>" onclick="confirm('Supprimer ce commentaire ?')"><i class="fas fa-trash-alt"></i></a>
                             </td>
                             <td>
                                 <?php if ($comment->getReport() == 1) { ?>
@@ -59,9 +60,9 @@
                             <td><?= $chapter->getNumChapter() ?></td>
                             <td><?= $chapter->getTitle() ?></td>
                             <td>
-                                <a href="views/frontend/single.php?chapter_id=<?= $chapter->getId() ?>">Voir</a> |
-                                <a href="index.php?action=update&chapter_id=<?= $chapter->getId() ?>">Modifier</a> |
-                                <a href="index.php?action=panel&chapter_id=<?= $chapter->getId() ?>" onclick="return confirm('Supprimer ce commentaire ?')">Supprimer</a>
+                                <a href="index.php?action=single&chapter_id=<?= $chapter->getId() ?>"><i class="far fa-eye"></i></a> |
+                                <a href="index.php?action=update&chapter_id=<?= $chapter->getId() ?>"><i class="fas fa-edit"></i></a> |
+                                <a href="index.php?action=panel&chapter_id=<?= $chapter->getId() ?>"><i class="fas fa-trash-alt"></i></a>
                             </td>
                         </tr>
                 </tbody>

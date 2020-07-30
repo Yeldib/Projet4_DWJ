@@ -13,21 +13,37 @@
 </head>
 
 <body>
-    <!-- Navbar -->
+
     <div class="container">
+
+        <!-- Message de notification -->
+        <?php
+        Session::flashError();
+        Session::flashValidate();
+        ?>
+
+        <!-- Navbar -->
         <header>
-            <div class="nav-scroller py-1 mb-2">
-                <nav class="nav d-flex justify-content-between">
-                    <a class="p-2 text-muted" href="index.php?action=home">Accueil</a>
-                    <a class="p-2 text-muted" href="#">À propos de l'auteur</a>
-                    <?php if (isset($_SESSION['id'])) { ?>
-                        <a class="btn btn-sm btn-outline-secondary" href="views\frontend\signOut.php">Deconnexion</a>
-                        <?php if ($_SESSION['roles'] === 'ROLE_ADMIN') { ?>
-                            <a class="btn btn-primary" href="index.php?action=panel">Administration</a>
+            <div class="nav-scroller py-0 mb-2 col-12">
+                <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+                    <div class="collapse navbar-collapse" id="navbarColor01">
+                        <ul class="navbar-nav mr-auto">
+                            <li class="nav-item active">
+                                <a class="nav-link" href="index.php?action=home">Accueil</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#">À propos de l'auteur</a>
+                            </li>
+                        </ul>
+                        <?php if (isset($_SESSION['id'])) { ?>
+                            <a class="btn btn-outline-light btn-sm my-2 my-sm-0" href="views\frontend\signOut.php">Deconnexion</a>
+                            <?php if ($_SESSION['roles'] === 'ROLE_ADMIN') { ?>
+                                <a class="btn btn-outline-light btn-sm my-2 my-sm-0 ml-3" href="index.php?action=panel">Administration</a>
+                            <?php } ?>
+                        <?php } else { ?>
+                            <a class="btn btn-outline-success btn-sm my-2 my-sm-0" href="index.php?action=connexion">Connexion</a>
                         <?php } ?>
-                    <?php } else { ?>
-                        <a class="btn btn-sm btn-outline-secondary" href="index.php?action=connexion">Connexion</a>
-                    <?php } ?>
+                    </div>
                 </nav>
             </div>
         </header>

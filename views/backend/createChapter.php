@@ -9,7 +9,7 @@
         <form method="post">
             <div class="form-group">
                 <p><label for="num-chapitre">Numéro du chapitre</label>
-                    <input type="text" name="num_chapter" placeholder="Chapitre 1" class="form-control"></p>
+                    <input type="text" name="num_chapter" placeholder="ex: Chapitre 1" class="form-control"></p>
             </div>
             <div class="form-group">
                 <p><label for="titre">Titre du chapitre</label>

@@ -23,8 +23,8 @@ class BackendController
                 && !empty($_GET['chapter_id'])
                 && (int) $_GET['chapter_id']
             ) {
-
                 $chapterManager->delete($_GET['chapter_id']);
+                $_SESSION['valide'] = "Chapitre supprimé";
             }
 
             // Suppression d'un commentaire
@@ -33,11 +33,11 @@ class BackendController
                 && !empty($_GET['id'])
                 && (int) $_GET['id']
             ) {
-
                 $commentManager->delete($_GET['id']);
+                $_SESSION['valide'] = "Commentaire supprimé";
             }
         } else {
-            echo "Page non autorisée";
+            $_SESSION['error'] = "Page Web inaccessible";
             header('Location: index.php?action=home');
         }
 
@@ -50,10 +50,8 @@ class BackendController
      */
     public function create()
     {
-
         // Ajout d'un chapitre avec des vérifications
         if (!empty($_POST)) {
-
             if (
                 isset($_POST['num_chapter']) && !empty($_POST['num_chapter'])
                 && isset($_POST['title']) && !empty($_POST['title'])
@@ -72,9 +70,10 @@ class BackendController
                 ]);
                 $chapterManager = new ChapterManager;
                 $chapterManager->add($chapter);
-                // Chapitre enregistré
+
+                $_SESSION['valide'] = "Chapitre $chapterTitle publié avec succès.";
             } else {
-                // Champs mal rempli
+                $_SESSION['error'] = "Veuillez remplir les champs requis.";
             }
         }
 

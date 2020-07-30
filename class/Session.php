@@ -2,33 +2,27 @@
 
 class Session
 {
-    /**
-     * Définie un message de notification et un type avec bootstrap (success, danger etc..)
-     *
-     * @param [type] $message
-     * @param string $type
-     */
-    public function setFlash($message, $type = 'danger')
+    public static function flashError()
     {
-        $_SESSION['flash'] = [
-            'message' => $message,
-            'type' => $type
-        ];
+        if (isset($_SESSION['error'])) {
+?>
+            <div class="alert alert-danger">
+                <a class="close">x</a>
+                <?php echo $_SESSION['error'];
+                unset($_SESSION['error']) ?>
+            </div>
+        <?php }
     }
 
-    /**
-     * Affiche le message de notification
-     */
-    public function flash()
+    public static function flashValidate()
     {
-        if (isset($_SESSION['flash'])) {
-?>
-            <div class="alert alert-<?php echo $_SESSION['flash']['type'] ?>">
+        if (isset($_SESSION['valide'])) {
+        ?>
+            <div class="alert alert-success">
                 <a class="close">x</a>
-                <?php echo $_SESSION['flash']['message'] ?>
+                <?php echo $_SESSION['valide'];
+                unset($_SESSION['valide']) ?>
             </div>
-<?php
-            unset($_SESSION['flash']);
-        }
+<?php }
     }
 }

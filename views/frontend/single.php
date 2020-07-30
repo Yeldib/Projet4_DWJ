@@ -30,7 +30,7 @@
             <p>Votre avis m'intéresse, n'hésitez pas à commenter.</p>
             <p>
                 <label for="author">Pseudo :</label>
-                <input type="text" class="form-control" name="author">
+                <input type="text" class="form-control" name="author" value="<?php echo $_SESSION['pseudo'] ?>">
             </p>
             <p>
                 <label for="comment">Votre commentaire :</label>

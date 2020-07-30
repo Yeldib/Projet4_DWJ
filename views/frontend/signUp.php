@@ -2,14 +2,18 @@
 <?php $metaDescription = "Page de connexion au blog de Jean Forteroche"; ?>
 <?php $title = "Connexion" ?>
 
-<form method="POST">
-    <h2>Se connecter</h2><br>
-    <p><input type="text" name="pseudo" placeholder="Pseudo"></p>
-    <p><input type="password" name="pass" placeholder="Mot de passe"></p>
-    <p><input type="submit" name="connexion" value="Connexion"></p>
-    <p>Vous n'avez pas encore de compte ? <a href="index.php?action=register">Vous inscrire.</a></p>
+<form method="POST" class="col-3 mx-auto">
+    <div class="form-group">
+        <label for="pseudo">Pseudo</label>
+        <input type="text" name="pseudo" id="pseudo" class="form-control">
+    </div>
+    <div class="form-group">
+        <label for="password">Mot de passe</label>
+        <input type="password" name="pass" class="form-control" id="password">
+    </div>
+    <button type="submit" name="connexion" class="btn btn-primary btn-sm">Se connecter</button>
+    <p>Pour vous inscrire, <a href="index.php?action=register">cliquez ici.</a></p>
 </form>
-
 
 <?php $pageContent = ob_get_clean(); ?>
 <?php require 'views\frontend\template.php'; ?>
