@@ -13,7 +13,7 @@
             <label for="password">Mot de passe</label>
             <input type="password" name="pass" class="form-control" id="password">
         </div>
-        <button type="submit" name="connexion" class="btn btn-primary btn-sm ">Se connecter</button>
+        <button type="submit" name="connexion" class="btn btn-primary btn-sm">Se connecter</button>
         <p class="mt-5">Pour vous inscrire, <a href="index.php?action=register">cliquez ici.</a></p>
     </form>
 </div>

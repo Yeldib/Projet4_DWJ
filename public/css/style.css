@@ -132,8 +132,10 @@
 }
 
 .close {
-    border: none;
-    cursor: pointer;
+    position: absolute;
+    top: -3px;
+    right: 3px;
+    font-size: 0.9rem;
 }
 
 #flash-msg {

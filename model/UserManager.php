@@ -51,4 +51,34 @@ class UserManager
         $result = $req->fetch();
         return new User($result);
     }
+
+    /**
+     * Vérifie si le pseudo existe dans la base de données
+     *
+     * @param [type] $pseudo
+     */
+    public function isPseudoExist($pseudo)
+    {
+        $query = $this->db->prepare('SELECT pseudo FROM users WHERE LOWER(pseudo) = ?');
+        $query->execute([
+            strtolower($pseudo)
+        ]);
+
+        return $query->fetch(PDO::FETCH_ASSOC);
+    }
+
+    /**
+     * Vérifie si le mail existe dans la base de données
+     *
+     * @param [type] $email
+     */
+    public function isEmailExist($email)
+    {
+        $query = $this->db->prepare('SELECT email FROM users WHERE LOWER(email) = ?');
+        $query->execute([
+            strtolower($email)
+        ]);
+
+        return $query->fetch(PDO::FETCH_ASSOC);
+    }
 }

@@ -36,13 +36,25 @@ class FrontendController
                 $userPass = $_POST['pass'];
                 $passHash = password_hash($userPass, PASSWORD_DEFAULT);
 
-                $user = new User([
-                    'pseudo' => $userPseudo,
-                    'pass' => $passHash,
-                    'email' => $email
-                ]);
-                $userManager->add($user);
-                $_SESSION['valide'] = "Merci pour votre inscription.";
+                if (empty($userManager->isPseudoExist($_POST['pseudo']))) {
+                    if (empty($userManager->isEmailExist($_POST['email']))) {
+                        if (preg_match('#^(?=.*[a-z])(?=.*[A-Z])(?=.*\W).{8,}$#', $userPass)) {
+                            $user = new User([
+                                'pseudo' => $userPseudo,
+                                'pass' => $passHash,
+                                'email' => $email
+                            ]);
+                            $userManager->add($user);
+                            $_SESSION['valide'] = "Merci pour votre inscription.";
+                        } else {
+                            $_SESSION['error'] = "Mot de passe non conforme";
+                        }
+                    } else {
+                        $_SESSION['error'] = "Cet email est déjà utilisé";
+                    }
+                } else {
+                    $_SESSION['error'] = "Ce pseudonyme est déjà utilisé";
+                }
             } else {
                 $_SESSION['error'] = "Champs mal rempli";
             }

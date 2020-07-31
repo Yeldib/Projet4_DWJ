@@ -18,6 +18,7 @@
                 <label for="pass">Mot de passe</label>
                 <input type="password" class="form-control" name="pass">
             </p>
+            <p><em>Le mot de passe doit faire au moins 8 caractères et doit comporter au moins une majuscule et un caractère spécial.</em></p>
             <p class="pt-1 pb-4">
                 <input type="submit" class="btn btn-primary btn-sm" value="S'inscrire"><br />
             </p>
