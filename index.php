@@ -21,7 +21,7 @@ spl_autoload_register(function ($class) {
 $frontend = new FrontendController;
 $backend = new BackendController;
 
-if (isset($_GET['action'])) {
+if (isset($_GET['action']) && !empty($_GET['action'])) {
 
     if ($_GET['action'] == 'home') {
         $frontend->home();

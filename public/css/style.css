@@ -1,6 +1,7 @@
 .bg-image-home {
     background-image: url("../../public/images/img_couv.jpg");
     height: 450px;
+    opacity: 0.8;
 }
 
 #list-chapters-home {
@@ -10,7 +11,7 @@
 #home-title {
     color: white;
     text-align: center;
-    margin-bottom: 100px;
+    padding-top: 150px;
     /* font-family: 'Meddon', cursive; */
     text-shadow: 1px 2px 2px black;
     letter-spacing: 1px;
@@ -18,24 +19,32 @@
 
 #biography-title {
     color: black;
+    text-align: center;
+    /* font-family: 'Meddon', cursive; */
     text-shadow: 1px 2px 2px white;
     letter-spacing: 1px;
-    font-size: 3rem;
+    margin-bottom: 100px;
+}
+
+#h2-title {
+    color: white;
+    text-align: center;
+    text-shadow: 1px 2px 2px black;
+    margin: 45px 0px;
 }
 
 #biography-content {
     background-color: white;
     font-size: 1.5rem;
-    margin: 110px 110px;
-    padding: 20px 20px;
+    padding: 15px 15px;
     border-radius: 5px;
+    opacity: 0.8;
 }
 
 .bg-image-author {
     background: url("../../public/images/jforteroche.jpg");
     height: 450px;
     background-size: cover;
-    margin: 61px 55px;
     box-shadow: 2px 3px 2px black;
 }
 
@@ -44,21 +53,19 @@
 }
 
 #bg-img-body {
-    background: url("../../public/images/oldPaper.jpg") center fixed;
+    background: url("../../public/images/pen.jpg") center fixed;
 }
 
 #form-connexion {
-    margin-top: 120px;
+    margin-top: 190px;
     background-color: white;
     border-radius: 5px;
-    height: 420px;
 }
 
 #form-register {
-    margin-top: 120px;
+    margin-top: 190px;
     background-color: white;
     border-radius: 5px;
-    height: 420px;
 }
 
 #position-num-chapter {
@@ -130,6 +137,8 @@
 }
 
 #flash-msg {
+    position: absolute;
+    top: 60px;
     animation-name: flashMessage;
     animation-duration: 1.1s;
     animation-fill-mode: forwards;
@@ -137,11 +146,22 @@
 
 @keyframes flashMessage {
     from {
-        transform: translateY(-100px);
+        transform: translateX(-400px);
     }
 
     to {
-        transform: translateY(-56px);
+        transform: translateX(5px);
 
     }
+}
+
+#single-chapter {
+    margin-top: 150px;
+    margin-bottom: 100px;
+}
+
+#footer {
+    border-top: 1px solid black;
+    margin-top: 180px;
+    color: black;
 }

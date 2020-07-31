@@ -3,17 +3,15 @@
 
 <?php $title =  $chapter->getNumChapter() . " - " . $chapter->getTitle() ?>
 
-<!-- Affiche un article -->
-<div class="row mb-4 mt-5 mr-5 ml-5">
+<!-- Affiche un chapitre -->
+<div id="single-chapter" class="col">
     <?php if (!empty($chapter)) { ?>
-        <div class="col">
-            <div class="row no-gutters border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative bg-light">
-                <div class="col p-4 d-flex flex-column position-static">
-                    <strong class="d-inline-block mb-2 text-primary"><?= $chapter->getNumChapter() ?></strong>
-                    <h3 class="mb-0"><?= $chapter->getTitle() ?></h3>
-                    <div class="mb-1 text-muted">publié le <?= $chapter->getCreatedAt() ?></div>
-                    <p class="card-text mb-auto pl-5 pr-5 pt-5 pb-5"><?= $chapter->getContent() ?></p>
-                </div>
+        <div class="row no-gutters border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative bg-light">
+            <div class="col p-3 d-flex flex-column position-static">
+                <strong class="d-inline-block mb-2 text-primary"><?= $chapter->getNumChapter() ?></strong>
+                <h3 class="mb-0"><?= $chapter->getTitle() ?></h3>
+                <div class="mb-1 text-muted">publié le <?= $chapter->getCreatedAt() ?></div>
+                <p class="card-text mb-auto"><?= $chapter->getContent() ?></p>
             </div>
         </div>
     <?php } else { ?>
@@ -75,4 +73,4 @@
 </div>
 
 <?php $pageContent = ob_get_clean(); ?>
-<?php require 'views\frontend\template.php'; ?>
+<?php require 'views/frontend/template.php'; ?>

@@ -74,4 +74,4 @@
 </section>
 
 <?php $pageContent = ob_get_clean(); ?>
-<?php require 'views\backend\template.php'; ?>
+<?php require 'views/backend/template.php'; ?>

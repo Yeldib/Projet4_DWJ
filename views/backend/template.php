@@ -42,8 +42,9 @@
             </div>
         </header>
 
-        <?= $pageContent ?>
-
+        <section>
+            <?= $pageContent ?>
+        </section>
 
     </div>
 

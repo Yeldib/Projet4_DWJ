@@ -3,18 +3,18 @@
 <?php $title = "Page d'accueil du blog de Jean Forteroche" ?>
 
 <!-- Hero -->
-<div class="jumbotron text-white bg-image-home">
-    <div class="col-md-6 px-0">
-        <h1 class="display-4 font-italic">Billet simple pour l'Alaska </h1><br>
-        <p><em>de Jean Forteroche</em></p>
+<div class="text-white bg-image-home">
+    <div id="home-title" class="col">
+        <h1>Billet simple pour l'Alaska </h1>
+        <em>de Jean Forteroche</em>
     </div>
 </div>
 
-<h1 id="home-title">Derniers chapitres publiés</h1>
+<h2 id="h2-title">Derniers chapitres publiés</h2>
 <!-- Affiche tous les chapitres -->
 <div class="row mb-2">
     <?php foreach ($chapters as $chapter) { ?>
-        <div class="col-md-6">
+        <div class="col-md-6 mr-0">
             <div id="list-chapters-home" class="row no-gutters border rounded overflow-hidden flex-md-row mb-4 mr-4 ml-4 shadow-sm h-md-250 position-relative">
                 <div class="col p-4 d-flex flex-column position-static">
                     <h3 class="mb-0"><?= $chapter->getTitle() ?></h3>
@@ -34,4 +34,4 @@
 </div>
 
 <?php $pageContent = ob_get_clean(); ?>
-<?php require 'views\frontend\template.php'; ?>
+<?php require 'views/frontend/template.php'; ?>

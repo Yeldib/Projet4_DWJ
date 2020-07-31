@@ -41,8 +41,7 @@ class BackendController
             header('Location: index.php?action=home');
         }
 
-
-        require_once 'views\backend\panel.php';
+        require_once 'views/backend/panel.php';
     }
 
     /**
