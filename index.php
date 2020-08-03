@@ -1,6 +1,4 @@
-<?php
-// Routeur principal
-session_start();
+<?php session_start();
 
 // Autoloader
 spl_autoload_register(function ($class) {
@@ -33,6 +31,10 @@ if (isset($_GET['action']) && !empty($_GET['action'])) {
         $frontend->connexion();
     } elseif ($_GET['action'] == 'biography') {
         $frontend->biography();
+    } elseif ($_GET['action'] == 'contact-webmaster') {
+        $frontend->contactDev();
+    } elseif ($_GET['action'] == 'contact-auteur') {
+        $frontend->contactAuthor();
     } elseif ($_GET['action'] == 'panel') {
         $backend->panel();
     } elseif ($_GET['action'] == 'create') {

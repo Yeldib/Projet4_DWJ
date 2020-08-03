@@ -19,7 +19,7 @@
         <header>
             <!-- Navbar  -->
             <nav id="bg-navbar-view" class="navbar navbar-expand-md navbar-dark fixed-top">
-                <a class="navbar-brand" href="index.php?action=home">Acceuil</a>
+                <a class="navbar-brand" href="index.php?action=home">Accueil</a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
@@ -29,8 +29,12 @@
                         <li class="nav-item">
                             <a class="nav-link" href="index.php?action=biography">À propos de l'auteur <span class="sr-only">(current)</span></a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">Contact</a>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Contact</a>
+                            <div class="dropdown-menu" aria-labelledby="dropdown01">
+                                <a class="dropdown-item" href="index.php?action=contact-webmaster">Développeur</a>
+                                <a class="dropdown-item" href="index.php?action=contact-auteur">Auteur</a>
+                            </div>
                         </li>
 
                         <li class="nav-item dropdown">
@@ -76,8 +80,8 @@
                 <div class="col-12 col-md">
                     <h5>Contact</h5>
                     <ul class="list-unstyled text-small">
-                        <li><a class="text-muted" href="#">Développeur</a></li>
-                        <li><a class="text-muted" href="#">Auteur</a></li>
+                        <li><a class="text-muted" href="index.php?action=contact-webmaster">Développeur</a></li>
+                        <li><a class="text-muted" href="index.php?action=contact-auteur">Auteur</a></li>
                     </ul>
                 </div>
             </div>

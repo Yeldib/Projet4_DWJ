@@ -2,6 +2,7 @@
     background-image: url("../../public/images/img_couv.jpg");
     height: 450px;
     opacity: 0.8;
+    z-index: 0;
 }
 
 #list-chapters-home {
@@ -139,6 +140,7 @@
 }
 
 #flash-msg {
+    z-index: 2;
     position: absolute;
     top: 60px;
     animation-name: flashMessage;
@@ -166,4 +168,9 @@
     border-top: 1px solid black;
     margin-top: 180px;
     color: black;
+}
+
+#form-contact-dev {
+    margin-top: 100px;
+    margin-left: 120px;
 }
