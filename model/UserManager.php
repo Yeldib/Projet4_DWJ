@@ -1,23 +1,13 @@
 <?php
-class UserManager
-{
-    private $db;
 
+class UserManager extends Manager
+{
     /**
      * Connexion à la base de données
      */
     public function __construct()
     {
-        try {
-            $this->db = new PDO(
-                'mysql:host=localhost;dbname=blog_jforteroche;charset=utf8;port=3308',
-                'root',
-                '',
-                [PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION]
-            );
-        } catch (Exception $e) {
-            die('Erreur : ' . $e->getMessage());
-        }
+        $this->getConnect();
     }
 
     /**
@@ -38,33 +28,23 @@ class UserManager
 
     /**
      * Vérifie si le pseudo existe dans la base de données
-     * @param User $user
-     * @return $result
-     */
-    public function findByPseudo(User $user)
-    {
-        $req = $this->db->prepare("SELECT * FROM users WHERE pseudo = :pseudo");
-        $req->execute([
-            'pseudo' => $user->getPseudo()
-        ]);
-
-        $result = $req->fetch();
-        return new User($result);
-    }
-
-    /**
-     * Vérifie si le pseudo existe dans la base de données
      *
      * @param [type] $pseudo
      */
     public function isPseudoExist($pseudo)
     {
-        $query = $this->db->prepare('SELECT pseudo FROM users WHERE LOWER(pseudo) = ?');
-        $query->execute([
+        $req = $this->db->prepare('SELECT * FROM users WHERE LOWER(pseudo) = ?');
+        $req->execute([
             strtolower($pseudo)
         ]);
 
-        return $query->fetch(PDO::FETCH_ASSOC);
+        $data = $req->fetch(PDO::FETCH_ASSOC);
+
+        if (!$data) {
+            return false;
+        } else {
+            return new User($data);
+        }
     }
 
     /**

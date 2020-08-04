@@ -18,7 +18,7 @@
 
         <header>
             <!-- Navbar  -->
-            <nav id="bg-navbar-view" class="navbar navbar-expand-md navbar-dark fixed-top">
+            <nav id="bg-navbar-frontview" class="navbar navbar-expand-md navbar-dark fixed-top">
                 <a class="navbar-brand" href="index.php?action=home">Accueil</a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
@@ -38,11 +38,11 @@
                         </li>
 
                         <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Chapitres</a>
+                            <a class="nav-link dropdown-toggle" href="#" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Liste des chapitres</a>
                             <div class="dropdown-menu" aria-labelledby="dropdown01">
-                                <a class="dropdown-item" href="#">Chapitre 1</a>
-                                <a class="dropdown-item" href="#">Chapitre 2</a>
-                                <a class="dropdown-item" href="#">chapitre 3</a>
+                                <?php foreach ($chapters as $chapter) : ?>
+                                    <a class="dropdown-item" href="index.php?action=single&chapter_id=<?= $chapter->getId() ?>"><?= $chapter->getNumChapter() ?></a>
+                                <?php endforeach ?>
                             </div>
                         </li>
                     </ul>
@@ -70,7 +70,7 @@
             <?= $pageContent ?>
         </section>
 
-        <footer id="footer" class="pt-2">
+        <footer id="bloc-footer" class="pt-2">
             <div class="row">
                 <div class="col-12 col-md">
                     <small class="d-block mb-3 pl-3 text-muted">&copy;2019-2020</small>

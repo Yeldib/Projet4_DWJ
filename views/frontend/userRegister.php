@@ -8,11 +8,15 @@
             <h1 class="h3 mb-3 font-weight-normal">Inscription</h1>
             <p>
                 <label for="pseudo">Pseudo</label>
-                <input type="text" class="form-control" name="pseudo">
+                <input type="text" class="form-control" name="pseudo" value="<?php if (isset($_POST['pseudo'])) {
+                                                                                    echo $_POST['pseudo'];
+                                                                                } ?>">
             </p>
-            <p>
+            <p class="form-group-register">
                 <label for="email">Votre email</label>
-                <input type="email" class="form-control" name="email">
+                <input type="email" class="" name="email" value="<?php if (isset($_POST['email'])) {
+                                                                        echo $_POST['email'];
+                                                                    } ?>">
             </p>
             <p>
                 <label for="pass">Mot de passe</label>
@@ -27,4 +31,4 @@
 </div>
 
 <?php $pageContent = ob_get_clean(); ?>
-<?php require 'views/frontend/template.php'; ?>
+<?php require 'views/frontend/templates/default.php'; ?>

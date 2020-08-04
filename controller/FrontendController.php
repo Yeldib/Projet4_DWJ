@@ -1,6 +1,15 @@
 <?php
 class FrontendController
 {
+
+    /**
+     * Affiche une page d'erreur 404
+     */
+    public function error404()
+    {
+        require_once 'views/frontend/error404.php';
+    }
+
     /**
      * Affiche la page d'accueil du site
      *
@@ -10,6 +19,7 @@ class FrontendController
     {
         $chapterManager = new ChapterManager;
         $chapters = $chapterManager->getList();
+        $commentManager = new CommentManager;
 
         require_once 'views/frontend/home.php';
     }
@@ -22,62 +32,21 @@ class FrontendController
     public function register()
     {
         $userManager = new UserManager;
+        $emailManager = new Email;
 
         if (!empty($_POST)) {
-            if (
-                isset($_POST['pseudo']) && !empty($_POST['pseudo'])
-                && isset($_POST['pass']) && !empty($_POST['pass'])
-                && isset($_POST['email']) && !empty($_POST['email'])
-            ) {
-                //On nettoie les données envoyées
-                $userPseudo = htmlspecialchars($_POST['pseudo']);
-                $email = htmlspecialchars($_POST['email']);
-
-                $userPass = $_POST['pass'];
-                $passHash = password_hash($userPass, PASSWORD_DEFAULT);
-
+            if (!empty($_POST['pseudo']) && !empty($_POST['pass']) && !empty($_POST['email'])) {
                 if (empty($userManager->isPseudoExist($_POST['pseudo']))) {
                     if (empty($userManager->isEmailExist($_POST['email']))) {
-                        if (preg_match('#^(?=.*[a-z])(?=.*[A-Z])(?=.*\W).{8,}$#', $userPass)) {
+                        if (preg_match('#^(?=.*[a-z])(?=.*[A-Z])(?=.*\W).{8,}$#', $_POST['pass'])) {
+                            $passHash = password_hash($_POST['pass'], PASSWORD_DEFAULT);
                             $user = new User([
-                                'pseudo' => $userPseudo,
+                                'pseudo' => $_POST['pseudo'],
                                 'pass' => $passHash,
-                                'email' => $email
+                                'email' => $_POST['email']
                             ]);
                             $userManager->add($user);
-
-
-                            // Email lors de l'inscription
-                            $headers = "MIME-Version: 1.0\r\n";
-                            $dest = $email;
-                            $subject = "Inscription sur le blog de Jean Forteroche";
-                            $headers .= 'From:"eldibaliya@gmail.com"' . "\n";
-                            $headers .= 'Content-Type:text/html; charset="uft-8"' . "\n";
-                            $headers .= 'Content-Transfer-Encoding: 8bit';
-
-                            $message = "
-                    <html>
-                        <body>
-                        <img src='' alt=''>
-                            <div align='left'>
-                                Bonjour $userPseudo,<br/><br/>
-                                Merci pour votre inscription.<br/>
-                                J'éspère sincèrement que vous apprécierez mon livre.<br/>
-                                N'hésitez pas à me contacter ou laisser des commentaires directement sur le blog.<br/><br/>
-                                À bientôt,<br/>
-                                Jean Forteroche.
-                            </div>
-                        </body>
-                    </html>
-                    ";
-
-                            if (mail($dest, $subject, $message, $headers)) {
-                                $_SESSION['valide'] = "Merci pour votre inscription. Un email vous a été envoyé.";
-                                header('Location: index.php?action=connexion');
-                                exit();
-                            } else {
-                                $_SESSION['error'] = "Echec de l'envoi";
-                            };
+                            $emailManager->sendMailRegister($_POST['email'], $_POST['pseudo']);
                         } else {
                             $_SESSION['error'] = "Mot de passe non conforme";
                         }
@@ -88,7 +57,17 @@ class FrontendController
                     $_SESSION['error'] = "Ce pseudonyme est déjà utilisé";
                 }
             } else {
-                $_SESSION['error'] = "Champs mal rempli";
+                switch (true) {
+                    case empty($_POST['pseudo']):
+                        $_SESSION['error'] = "Pseudonyme requis pour vous inscrire.";
+                        break;
+                    case empty($_POST['email']):
+                        $_SESSION['error'] = "Email non renseigné";
+                        break;
+                    case empty($_POST['pass']):
+                        $_SESSION['error'] = "Mot de passe non renseigné";
+                        break;
+                }
             }
         }
         require_once 'views/frontend/userRegister.php';
@@ -101,24 +80,23 @@ class FrontendController
      */
     public function connexion()
     {
-        $userManager = new UserManager;
+        if (!empty($_POST)) {
+            $validation = true;
 
-        if (isset($_POST['connexion'])) {
-            if (!empty($_POST['pseudo']) && !empty($_POST['pass'])) {
-                $pseudoConnexion = htmlspecialchars($_POST['pseudo']);
-                $passConnexion = htmlspecialchars($_POST['pass']);
+            if (empty($_POST['pseudo']) || empty($_POST['pass'])) {
+                $validation = false;
+                $_SESSION['error'] = "Veuillez remplir les champs requis.";
+            }
 
-                $setUser = new User([
-                    'pseudo' => $pseudoConnexion,
-                    'pass' => $passConnexion
-                ]);
-                $user = $userManager->findByPseudo($setUser);
-
-                $isPassCorrect = password_verify($passConnexion, $user->getPass());
+            if ($validation) {
+                $userManager = new UserManager();
+                $user = $userManager->isPseudoExist($_POST['pseudo']);
 
                 if (!$user) {
-                    $_SESSION['error'] = "Mauvais identifiant ou mot de passe ";
+                    $_SESSION['error'] = "Mauvais identifiant ou mot de passe";
                 } else {
+                    $isPassCorrect = password_verify($_POST['pass'], $user->getPass());
+
                     if ($isPassCorrect) {
                         $_SESSION['id'] = $user->getId();
                         $_SESSION['pseudo'] = $user->getPseudo();
@@ -131,8 +109,6 @@ class FrontendController
                         $_SESSION['error'] = 'Mauvais identifiant ou mot de passe';
                     }
                 }
-            } else {
-                $_SESSION['error'] = 'Veuillez remplir les champs requis.';
             }
         }
 
@@ -142,48 +118,49 @@ class FrontendController
     // Affiche un chapitre avec ces commentaires
     public function single()
     {
-        if (!empty($_GET['chapter_id'])) {
-
-            $chapterManager = new ChapterManager;
-            $chapter = $chapterManager->get($_GET['chapter_id']);
-
-            $commentManager = new CommentManager;
-            $comments = $commentManager->getById($_GET['chapter_id']);
-
-            // Insertion d'un commentaire
-            if (!empty($_POST)) {
-                if (!empty($_POST['author']) && !empty($_POST['comment'])) {
-
-                    $chapterId = htmlspecialchars($_GET['chapter_id']);
-                    $insertAuthor = htmlspecialchars($_POST['author']);
-                    $insertComment = nl2br(htmlspecialchars($_POST['comment']));
-
-                    $insert = new Comment([
-                        'chapter_id'    => $chapterId,
-                        'author'        => $insertAuthor,
-                        'comment'       => $insertComment
-                    ]);
-                    $commentManager->insert($insert);
-                    $_SESSION['valide'] = 'Merci pour votre commentaire';
-                    header('Location: index.php?action=single&chapter_id=' . $_GET['chapter_id']);
-                    exit();
-                } else {
-                    $_SESSION['error'] = 'Champs invalides';
-                }
-            }
-
-            // Signale un commentaire
-            if (isset($_POST['report'])) {
-                $commentManager->report($_POST['report']);
-                unset($_SESSION['error']);
-                $_SESSION['valide'] = 'Le message a bien été signalé';
-            }
-            require_once 'views/frontend/single.php';
-        } else {
-            $_SESSION['error'] = "L'URL est invalide";
-            header('location: index.php?action=home');
-            exit();
+        if (empty($_GET['chapter_id'])) {
+            $_SESSION['error'] = "URL invalide";
+            return header('Location: index.php?action=home');
         }
+
+        $chapterManager = new ChapterManager;
+        if (!$chapter = $chapterManager->get($_GET['chapter_id'])) {
+            $_SESSION['error'] = "Page introuvable";
+            return header('Location: index.php?action=home');
+        }
+
+        $commentManager = new CommentManager;
+        $comments = $commentManager->getById($_GET['chapter_id']);
+
+        $chapters = $chapterManager->getList();
+        // Insertion d'un commentaire
+        if (!empty($_POST)) {
+            if (!empty($_POST['author']) && !empty($_POST['comment'])) {
+
+                $chapterId = htmlspecialchars($_GET['chapter_id']);
+                $insertAuthor = htmlspecialchars($_POST['author']);
+                $insertComment = nl2br(htmlspecialchars($_POST['comment']));
+
+                $insert = new Comment([
+                    'chapter_id'    => $chapterId,
+                    'author'        => $insertAuthor,
+                    'comment'       => $insertComment
+                ]);
+                $commentManager->insert($insert);
+                $_SESSION['valide'] = 'Merci pour votre commentaire';
+                return header('Location: index.php?action=single&chapter_id=' . $_GET['chapter_id']);
+            } else {
+                $_SESSION['error'] = 'Champs invalides';
+            }
+        }
+
+        // Signale un commentaire
+        if (isset($_POST['report'])) {
+            $commentManager->report($_POST['report']);
+            unset($_SESSION['error']);
+            $_SESSION['valide'] = 'Le message a bien été signalé';
+        }
+        require_once 'views/frontend/single.php';
     }
 
     /**
@@ -193,6 +170,9 @@ class FrontendController
      */
     public function biography()
     {
+        $chapterManager = new ChapterManager;
+        $chapters = $chapterManager->getList();
+
         require_once 'views/frontend/biography.php';
     }
 
@@ -203,49 +183,13 @@ class FrontendController
      */
     public function contactDev()
     {
+        $chapterManager = new ChapterManager;
+        $chapters = $chapterManager->getList();
+        $emailManager = new Email;
         $formContact = new Form($_POST);
-
         if (isset($_POST['mailform'])) {
-            if (
-                !empty($_POST['fname']) &&
-                !empty($_POST['lname']) &&
-                !empty($_POST['email']) &&
-                !empty($_POST['phone']) &&
-                !empty($_POST['message'])
-            ) {
-
-                // nettoyer l'envoie des variables
-                $fnameContact = htmlspecialchars($_POST['fname']);
-                $lnameContact = htmlspecialchars($_POST['lname']);
-                $emailContact = htmlspecialchars($_POST['email']);
-                $phoneContact = htmlspecialchars($_POST['phone']);
-                $messageContact = htmlspecialchars($_POST['message']);
-
-                $headers = "MIME-Version: 1.0\r\n";
-                $dest = "eldibyasr27140@gmail.com";
-                $subject = "Message formulaire de contact WEBMASTER (blog JForteroche)";
-                $headers .= 'From:"eldibaliya@gmail.com"' . "\n";
-                $headers .= 'Content-Type:text/html; charset="uft-8"' . "\n";
-                $headers .= 'Content-Transfer-Encoding: 8bit';
-
-                $message = "
-        <html>
-            <body>
-                <div align='left'>
-                    Message de $fnameContact $lnameContact : <br/><br/>
-                    $messageContact <br/><br/>
-                    Email: $emailContact <br/>
-                    Tél: $phoneContact <br/>
-                </div>
-            </body>
-        </html>
-        ";
-
-                if (mail($dest, $subject, $message, $headers)) {
-                    $_SESSION['valide'] = "Votre message a été envoyé avec succès.";
-                } else {
-                    $_SESSION['error'] = "Echec de l'envoi";
-                };
+            if (!empty($_POST['fname']) && !empty($_POST['lname']) && !empty($_POST['email']) && !empty($_POST['phone']) && !empty($_POST['message'])) {
+                $emailManager->sendMailToDev($_POST['fname'], $_POST['lname'], $_POST['email'], $_POST['phone'], $_POST['message']);
             } else {
                 $_SESSION['error'] = "Champs requis manquants";
             }
@@ -255,6 +199,8 @@ class FrontendController
 
     public function contactAuthor()
     {
+        $chapterManager = new ChapterManager;
+        $chapters = $chapterManager->getList();
         require_once 'views/frontend/contactAuthor.php';
     }
 }

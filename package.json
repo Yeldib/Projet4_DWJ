@@ -1,0 +1,19 @@
+{
+  "name": "p4_01_codesource",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "sass": "sass --watch public/sass/style.scss:public/css/style.css"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Yeldib/Projet4_DWJ.git"
+  },
+  "author": "EL DIB",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Yeldib/Projet4_DWJ/issues"
+  },
+  "homepage": "https://github.com/Yeldib/Projet4_DWJ#readme"
+}

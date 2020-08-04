@@ -5,7 +5,7 @@ spl_autoload_register(function ($class) {
     $files = [
         "controller/$class.php",
         "model/$class.php",
-        "class/$class.php"
+        "services/$class.php"
     ];
 
     foreach ($files as $file) {
@@ -19,7 +19,7 @@ spl_autoload_register(function ($class) {
 $frontend = new FrontendController;
 $backend = new BackendController;
 
-if (isset($_GET['action']) && !empty($_GET['action'])) {
+if (isset($_GET['action'])) {
 
     if ($_GET['action'] == 'home') {
         $frontend->home();
@@ -41,6 +41,8 @@ if (isset($_GET['action']) && !empty($_GET['action'])) {
         $backend->create();
     } elseif ($_GET['action'] == 'update') {
         $backend->update();
+    } else {
+        $frontend->error404();
     }
 } else {
     $frontend->home();

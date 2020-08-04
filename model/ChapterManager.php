@@ -1,26 +1,13 @@
 <?php
 
-require_once 'Chapter.php';
-
-class ChapterManager
+class ChapterManager extends Manager
 {
-    private $db;
-
     /**
      * Connexion à la base de données
      */
     public function __construct()
     {
-        try {
-            $this->db = new PDO(
-                'mysql:host=localhost;dbname=blog_jforteroche;charset=utf8;port=3308',
-                'root',
-                '',
-                [PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION]
-            );
-        } catch (Exception $e) {
-            die('Erreur : ' . $e->getMessage());
-        }
+        $this->getConnect();
     }
 
     /**
@@ -52,9 +39,10 @@ class ChapterManager
             $id
         ]);
         $chapter = $req->fetch();
-        return new Chapter($chapter);
+        if ($chapter)
+            return new Chapter($chapter);
+        return false;
     }
-
 
     /**
      * Insère un chapitre dans la base de données
@@ -91,7 +79,7 @@ class ChapterManager
     }
 
     /**
-     * Supprime un chapitre
+     * Supprime un chapitre et les commentaires associés à ce dernier.
      *
      * @param [type] $id
      * 
@@ -99,6 +87,12 @@ class ChapterManager
     public function delete($id)
     {
         $req = $this->db->prepare('DELETE FROM chapters WHERE id = ?');
+        $req->execute([
+            $id
+        ]);
+        $req->execute();
+
+        $req = $this->db->prepare('DELETE FROM comments WHERE chapter_id = ?');
         $req->execute([
             $id
         ]);

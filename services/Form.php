@@ -10,6 +10,11 @@ class Form
         $this->data = $data;
     }
 
+    /**
+     * Retourne le tag HTML
+     *
+     * @param [type] $html
+     */
     private function surround($html)
     {
         return "<{$this->surround}>$html</{$this->surround}>";

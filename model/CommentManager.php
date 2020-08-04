@@ -1,26 +1,22 @@
 <?php
 
-require_once 'Comment.php';
-
-class CommentManager
+class CommentManager extends Manager
 {
-    private $db;
-
     /**
      * Connexion à la base de données
      */
     public function __construct()
     {
-        try {
-            $this->db = new PDO(
-                'mysql:host=localhost;dbname=blog_jforteroche;charset=utf8;port=3308',
-                'root',
-                '',
-                [PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION]
-            );
-        } catch (Exception $e) {
-            die('Erreur : ' . $e->getMessage());
-        }
+        $this->getConnect();
+    }
+
+    public function countByChapterId($chapterId)
+    {
+        $req = $this->db->prepare('SELECT COUNT(*) FROM comments WHERE chapter_id = ?');
+        $req->execute([
+            $chapterId
+        ]);
+        return $req->fetch();
     }
 
     /**

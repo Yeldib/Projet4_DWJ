@@ -38,8 +38,7 @@ class BackendController
             }
         } else {
             $_SESSION['error'] = "Page Web inaccessible";
-            header('Location: index.php?action=home');
-            exit();
+            return header('Location: index.php?action=home');
         }
 
         require_once 'views/backend/panel.php';
@@ -72,8 +71,7 @@ class BackendController
                 $chapterManager->add($chapter);
 
                 $_SESSION['valide'] = "Chapitre $chapterTitle publié avec succès.";
-                header('Location: index.php?action=home');
-                exit();
+                return header('Location: index.php?action=home');
             } else {
                 $_SESSION['error'] = "Veuillez remplir les champs requis.";
             }
@@ -124,16 +122,14 @@ class BackendController
                     $chapterManager->update($update);
 
                     $_SESSION['valide'] = "$numChapter ($chapterTitle) modifié";
-                    header('Location: index.php?action=home');
-                    exit();
+                    return  header('Location: index.php?action=home');
                 } else {
                     $_SESSION['error'] = "Champs incomplet";
                 }
             }
         } else {
             $_SESSION['error'] = "URL INVALIDE";
-            header('Location: index.php?action=home');
-            exit();
+            return header('Location: index.php?action=home');
         }
 
         require_once 'views/backend/updateChapter.php';

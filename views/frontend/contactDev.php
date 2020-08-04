@@ -3,7 +3,7 @@
 <?php $title = "Contact Webmaster" ?>
 
 <div id="form-contact-dev" class="row">
-    <div class="col-md-6">
+    <div class="col-lg-7 col-md-12 col-sm-12">
         <div class="well well-sm">
             <form class="form-horizontal" method="post">
                 <fieldset>
@@ -55,4 +55,4 @@
 </div>
 
 <?php $pageContent = ob_get_clean(); ?>
-<?php require 'views/frontend/template.php'; ?>
+<?php require 'views/frontend/templates/default.php'; ?>

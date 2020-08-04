@@ -8,7 +8,7 @@
 
 <h3 class="text-center mb-5 mt-5">Liste des commentaires</h3>
 
-<section class="container text-center">
+<section id="bloc-list-comments-panel" class="container text-center">
     <div class="row">
         <div class="col">
             <table class="table">
@@ -45,7 +45,7 @@
 <h3 class="text-center mb-5 mt-5">Liste des chapitres</h3>
 <p class="text-center"><a href="index.php?action=create" class="btn btn-primary">Rédiger un chapitre</a><br><br></p>
 
-<section class="container text-center mb-5">
+<section id="bloc-list-chapters-panel" class="container text-center mb-5">
     <div class="row">
         <div class="col">
             <table class="table">

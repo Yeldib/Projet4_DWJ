@@ -28,4 +28,4 @@
 </div>
 
 <?php $pageContent = ob_get_clean(); ?>
-<?php require 'views/frontend/template.php'; ?>
+<?php require 'views/frontend/templates/default.php'; ?>

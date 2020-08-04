@@ -5,20 +5,14 @@
 
 <!-- Affiche un chapitre -->
 <div id="single-chapter" class="col">
-    <?php if (!empty($chapter)) { ?>
-        <div class="row no-gutters border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative bg-light">
-            <div class="col p-3 d-flex flex-column position-static">
-                <strong class="d-inline-block mb-2 text-primary"><?= $chapter->getNumChapter() ?></strong>
-                <h3 class="mb-0"><?= $chapter->getTitle() ?></h3>
-                <div class="mb-1 text-muted">publié le <?= $chapter->getCreatedAt() ?></div>
-                <p class="card-text mb-auto"><?= $chapter->getContent() ?></p>
-            </div>
+    <div class="row no-gutters border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative bg-light">
+        <div class="col p-3 d-flex flex-column position-static">
+            <strong class="d-inline-block mb-2 text-primary"><?= $chapter->getNumChapter() ?></strong>
+            <h3 class="mb-0"><?= $chapter->getTitle() ?></h3>
+            <div class="mb-1 text-muted">publié le <?= $chapter->getCreatedAt() ?></div>
+            <p class="card-text mb-auto"><?= $chapter->getContent() ?></p>
         </div>
-    <?php } else { ?>
-        <?= $_SESSION['flash'] = "URL INVALIDE";
-        // header('Location: ../index.php');
-        ?>
-    <?php } ?>
+    </div>
 </div>
 
 <!-- Formulaire commentaires -->
@@ -73,4 +67,4 @@
 </div>
 
 <?php $pageContent = ob_get_clean(); ?>
-<?php require 'views/frontend/template.php'; ?>
+<?php require 'views/frontend/templates/default.php'; ?>
