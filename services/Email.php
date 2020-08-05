@@ -18,17 +18,30 @@ class Email
         $message = "
             <html>
             <body>
-                <figure>
-                    <img src='https://cdn.pixabay.com/photo/2016/07/31/16/24/banner-1559400_960_720.jpg' height='150px' alt='jean'>
-                        <figcaption>
-                            Bonjour $userPseudo,<br /><br />
-                            Merci pour votre inscription.<br />
-                            J'éspère sincèrement que vous apprécierez mon livre.<br />
-                            N'hésitez pas à me contacter ou laisser des commentaires directement sur le blog.<br /><br />
-                            À bientôt,<br />
-                            Jean Forteroche.
-                        </figcaption>
-                </figure>
+            <figure>
+            <div>
+                <img src='https://cdn.pixabay.com/photo/2016/07/31/16/24/banner-1559400_960_720.jpg' style='border-radius: 25px;
+                width: 270px;
+                height: 100px;' alt='banniere'>
+                <p style='
+                color: black;
+                font-family: sans-serif;
+                font-size: 1.3rem;
+                '>Bienvenue sur mon blog !</p>
+            </div>
+            <figcaption style='color: black;
+            font-family: sans-serif;
+            text-align: start;
+            width: 214px;
+            margin-left: 25px;'>
+                Bonjour $userPseudo,<br /><br />
+                Merci pour votre inscription.<br />
+                J'éspère sincèrement que vous apprécierez mon livre.<br />
+                N'hésitez pas à me contacter ou laisser des commentaires directement sur le blog.<br /><br />
+                À bientôt,<br />
+                Jean Forteroche.
+            </figcaption>
+        </figure>
             </body>
             </html>
         ";
@@ -69,12 +82,15 @@ class Email
         $message = "
                 <html>
                     <body>
-                        <div align='left'>
-                            Message de $fnameContact $lnameContact : <br/><br/>
-                            $messageContact <br/><br/>
-                            Email: $emailContact <br/>
-                            Tél: $phoneContact <br/>
-                        </div>
+                    <div>
+                    <p>Message de $fnameContact $lnameContact :</p> <br /><br />
+                    <p style='border: 1px solid black; padding: 15px 15px; width: 280px; border-radius: 5px;'>
+                        $messageContact
+                    </p>
+                    <br /><br />
+                    <p>Email: $emailContact</p> <br />
+                    <p>Tél: $phoneContact</p> <br />
+                </div>
                     </body>
                 </html>
                 ";

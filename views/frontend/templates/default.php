@@ -72,16 +72,16 @@
 
         <footer id="bloc-footer" class="pt-2">
             <div class="row">
-                <div class="col-12 col-md">
-                    <small class="d-block mb-3 pl-3 text-muted">&copy;2019-2020</small>
-                    <small class="d-block mb-3 pl-3 text-muted">Sujet de formation Openclassrooms</small>
+                <div class="col-12 col-md col-sm">
+                    <small class="d-block mb-3 pl-3 text-footer">&copy;2019-2020</small>
+                    <small class="d-block mb-3 pl-3 text-footer">Sujet de formation Openclassrooms</small>
                 </div>
 
-                <div class="col-12 col-md">
-                    <h5>Contact</h5>
+                <div class="col-12 col-md col-sm">
+                    <h5 class=" text-footer">Contact</h5>
                     <ul class="list-unstyled text-small">
-                        <li><a class="text-muted" href="index.php?action=contact-webmaster">Développeur</a></li>
-                        <li><a class="text-muted" href="index.php?action=contact-auteur">Auteur</a></li>
+                        <li><a class=" text-footer" href="index.php?action=contact-webmaster">Développeur</a></li>
+                        <li><a class=" text-footer" href="index.php?action=contact-auteur">Auteur</a></li>
                     </ul>
                 </div>
             </div>

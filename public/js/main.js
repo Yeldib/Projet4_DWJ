@@ -1,4 +1,4 @@
-let flashMsgId = document.getElementById('flash-msg');
+let flashMsgId = document.querySelector('.flash-msg');
 let closeId = document.querySelector('.close');
 
 closeId.addEventListener('click', function () {
@@ -6,7 +6,7 @@ closeId.addEventListener('click', function () {
             transform: 'translateX(5px)'
         },
         {
-            transform: 'translateX(-400px)'
+            transform: 'translateX(-500px)'
         }
     ], {
         duration: 800,

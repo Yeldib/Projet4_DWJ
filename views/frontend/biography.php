@@ -3,16 +3,14 @@
 <?php $title = "Biographie" ?>
 
 
-<div class="text-white bg-image-author">
-    <div class="col">
-    </div>
+<!-- Hero -->
+<div class="hero-image-author">
+    <h1 id="h1-title-biography">Jean <br> Forteroche </h1>
 </div>
-<h1 id="biography-title">Jean Forteroche</h1>
 
-
-<div class="row mx-auto">
+<div id="bloc-biography-content" class="row mx-auto">
     <div class="col">
-        <p id="biography-content">Né en 1952, Jean Forteroche n'a eu cesse depuis d'épater la galerie par ces incessants apports dans le monde de la culture, des sciences en particulier au sein de la «confédération des Ingénieurs de Gisors de France et de Navarre» puissante association créée par Charles Quint quand il prit le pouvoir un samedi peu avant l'heure du repas. <br><br>
+        <p>Né en 1952, Jean Forteroche n'a eu cesse depuis d'épater la galerie par ces incessants apports dans le monde de la culture, des sciences en particulier au sein de la «confédération des Ingénieurs de Gisors de France et de Navarre» puissante association créée par Charles Quint quand il prit le pouvoir un samedi peu avant l'heure du repas. <br><br>
 
             Jean Forteroche a entamé son chemin vers la gloire en inventant les Plumes qui devinrent depuis le summum de la distinction pour tout homme moderne. En effet qui depuis n'a pas exhibé fièrement ses Plumes à la foule envieuse ? Pour cela, les habitants de la planète entière et en particulier de Gisors lui sont reconnaissants. <br><br>
 

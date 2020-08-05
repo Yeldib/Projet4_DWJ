@@ -3,29 +3,23 @@
 <?php $title = "Inscription" ?>
 
 <div id="form-register" class="text-center col-lg-4 col-md-5 col-sm-6 mx-auto">
-    <form method="POST" class="form-signin">
+    <form method="POST">
         <div class="form-group">
-            <h1 class="h3 mb-3 font-weight-normal">Inscription</h1>
-            <p>
-                <label for="pseudo">Pseudo</label>
-                <input type="text" class="form-control" name="pseudo" value="<?php if (isset($_POST['pseudo'])) {
-                                                                                    echo $_POST['pseudo'];
-                                                                                } ?>">
-            </p>
-            <p class="form-group-register">
-                <label for="email">Votre email</label>
-                <input type="email" class="" name="email" value="<?php if (isset($_POST['email'])) {
-                                                                        echo $_POST['email'];
-                                                                    } ?>">
-            </p>
-            <p>
-                <label for="pass">Mot de passe</label>
-                <input type="password" class="form-control" name="pass">
-            </p>
-            <p><em>Le mot de passe doit faire au moins 8 caractères et doit comporter au moins une majuscule et un caractère spécial.</em></p>
-            <p class="pt-1 pb-4">
-                <input type="submit" class="btn btn-primary btn-sm" value="S'inscrire"><br />
-            </p>
+            <h2 class="mb-3">Inscription</h2>
+
+            <label for="pseudo">Pseudo</label>
+            <?php echo $formContact->input('pseudo', 'text', 'Choisissez un pseudonyme'); ?>
+
+            <label for="email">Votre email</label>
+            <?php echo $formContact->input('email', 'email', 'Ex: mail@gmail.com') ?>
+
+            <label for="pass">Mot de passe</label>
+            <?php echo $formContact->input('pass', 'password') ?>
+
+            <small>Le mot de passe doit faire au moins 8 caractères et doit comporter au moins une majuscule et un caractère spécial.</small>
+
+            <?php echo $formContact->submit('submit', "S'inscrire") ?>
+
         </div>
     </form>
 </div>

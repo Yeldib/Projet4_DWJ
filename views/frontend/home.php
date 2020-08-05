@@ -4,10 +4,8 @@
 
 <!-- Hero -->
 <div class="hero-image">
-    <div class="hero-text">
-        <h1 id="h1-title-home">Billet simple pour l'Alaska </h1>
-        <em>de Jean Forteroche</em>
-    </div>
+    <h1 id="h1-title-home">Billet simple pour l'Alaska <br><em>de Jean Forteroche</em> </h1>
+
 </div>
 
 <!-- Affiche tous les chapitres -->

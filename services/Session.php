@@ -13,8 +13,8 @@ class Session
         if (isset($_SESSION['error'])) {
 ?>
             <div class="flash-msg">
-                <div class="alert alert-danger alert-dismissable">
-                    <a href="#" id="close" class="close">×</a>
+                <div class="alert alert-danger">
+                    <a href="#" class="close">×</a>
                     <strong><?php echo $_SESSION['error']; ?></strong>
                     <?php unset($_SESSION['error']); ?>
                 </div>
@@ -30,13 +30,12 @@ class Session
         if (isset($_SESSION['valide'])) {
         ?>
             <div class="flash-msg">
-                <div class="alert alert-success alert-dismissable">
+                <div class="alert alert-success">
                     <a href="#" class="close">×</a>
                     <strong><?php echo $_SESSION['valide']; ?></strong>
                     <?php unset($_SESSION['valide']); ?>
                 </div>
             </div>
-
 <?php }
     }
 }

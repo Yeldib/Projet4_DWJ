@@ -16,8 +16,10 @@
     <div class="container">
 
         <!-- Message de notification -->
-        <?php Session::flashError();
-        Session::flashValidate(); ?>
+        <?php
+        Session::flashValidate();
+        Session::flashError();
+        ?>
 
         <!-- Navbar -->
         <header>

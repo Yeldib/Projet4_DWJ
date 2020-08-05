@@ -2,34 +2,51 @@
 <?php $metaDescription = "Page de contact de l'auteur"; ?>
 <?php $title = "Contact Auteur" ?>
 
-<div id="form-contact-dev" class="row">
-    <div class="col-md-6">
+
+<div id="form-contact-author" class="row">
+    <div class="col-lg-7 col-md-12 col-sm-12">
         <div class="well well-sm">
             <form class="form-horizontal" method="post">
                 <fieldset>
-                    <legend class="header">Contactez Jean Forteroche</legend>
+                    <legend class="text-center header">Contacter l'Auteur</legend>
 
                     <div class="form-group">
                         <span class="col-md-1 col-md-offset-2 text-center"><i class="fa fa-user bigicon"></i></span>
                         <div class="col-md-8">
-                            <input type="text" name="" id="" placeholder="Prénom">
+                            <?php echo $formContact->input('fname', 'text', 'Nom'); ?>
                         </div>
                     </div>
+                    <div class="form-group">
+                        <span class="col-md-1 col-md-offset-2 text-center"><i class="fa fa-user bigicon"></i></span>
+                        <div class="col-md-8">
+                            <?php echo $formContact->input('lname', 'text', 'Prénom'); ?>
+                        </div>
+                    </div>
+
                     <div class="form-group">
                         <span class="col-md-1 col-md-offset-2 text-center"><i class="fa fa-envelope-o bigicon"></i></span>
                         <div class="col-md-8">
-                            <input type="email" name="" id="" placeholder="Adresse email">
+                            <?php echo $formContact->input('email', 'email', 'Adresse email'); ?>
                         </div>
                     </div>
+
+                    <div class="form-group">
+                        <span class="col-md-1 col-md-offset-2 text-center"><i class="fa fa-phone-square bigicon"></i></span>
+                        <div class="col-md-8">
+                            <?php echo $formContact->input('phone', 'tel', 'Numéro de télephone'); ?>
+                        </div>
+                    </div>
+
                     <div class="form-group">
                         <span class="col-md-1 col-md-offset-2 text-center"><i class="fa fa-pencil-square-o bigicon"></i></span>
                         <div class="col-md-8">
-                            <textarea name="" id="" cols="30" rows="10" placeholder="Votre message ici"></textarea>
+                            <?php echo $formContact->textArea('message', 'Entrez votre message ici. Je vous répondrai le plus rapidement possible.') ?>
                         </div>
                     </div>
+
                     <div class="form-group">
-                        <div class="col-md-12">
-                            <input type="submit" class="btn btn-primary btn-sm" value="Envoyer">
+                        <div class="col-md-12 text-center">
+                            <?php echo $formContact->submit('mailform'); ?>
                         </div>
                     </div>
                 </fieldset>

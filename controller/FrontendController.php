@@ -33,6 +33,7 @@ class FrontendController
     {
         $userManager = new UserManager;
         $emailManager = new Email;
+        $formContact = new Form($_POST);
 
         if (!empty($_POST)) {
             if (!empty($_POST['pseudo']) && !empty($_POST['pass']) && !empty($_POST['email'])) {
@@ -80,6 +81,7 @@ class FrontendController
      */
     public function connexion()
     {
+        $formContact = new Form($_POST);
         if (!empty($_POST)) {
             $validation = true;
 
@@ -201,6 +203,7 @@ class FrontendController
     {
         $chapterManager = new ChapterManager;
         $chapters = $chapterManager->getList();
+        $formContact = new Form($_POST);
         require_once 'views/frontend/contactAuthor.php';
     }
 }

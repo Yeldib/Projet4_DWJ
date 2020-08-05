@@ -62,7 +62,7 @@
                             <td>
                                 <a href="index.php?action=single&chapter_id=<?= $chapter->getId() ?>"><i class="far fa-eye"></i></a> |
                                 <a href="index.php?action=update&chapter_id=<?= $chapter->getId() ?>"><i class="fas fa-edit"></i></a> |
-                                <a href="index.php?action=panel&chapter_id=<?= $chapter->getId() ?>"><i class="fas fa-trash-alt"></i></a>
+                                <a href="index.php?action=panel&chapter_id=<?= $chapter->getId() ?>" onclick="return confirm('Supprimer ce commentaire ?')"><i class="fas fa-trash-alt"></i></a>
                             </td>
                         </tr>
                 </tbody>

@@ -25,9 +25,17 @@ class Form
         return isset($this->data[$index]) ? $this->data[$index] : null;
     }
 
-    public function input($name, $type, $placeholder)
+    /**
+     * Retourne un champ input 
+     *
+     * @param string $name nom du champ
+     * @param string $type type du champ (text, password, etc...)
+     * @param string $placeholder
+     * @return void
+     */
+    public function input($name, $type, $placeholder = "")
     {
-        return $this->surround('<input id="lname" name="' . $name . '" type="' . $type . '" placeholder="' . $placeholder . '" class="form-control" value="' . $this->getValue($name) . '">');;
+        return $this->surround('<input required id="lname" name="' . $name . '" type="' . $type . '" placeholder="' . $placeholder . '" class="form-control" value="' . $this->getValue($name) . '">');;
     }
 
     public function textArea($name, $placeholder)
@@ -35,8 +43,9 @@ class Form
         return $this->surround('<textarea class="form-control" name="' . $name . '" placeholder="' . $placeholder . '" rows="7"></textarea>');
     }
 
-    public function submit($name)
+
+    public function submit($name, $content)
     {
-        return $this->surround('<button type="submit" name="' . $name . '" class="btn btn-primary btn-lg">Envoyer</button>');
+        return $this->surround('<button type="submit" name="' . $name . '" class="btn btn-success btn-md">' . $content . '</button>');
     }
 }
