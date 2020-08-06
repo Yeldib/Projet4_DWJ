@@ -46,7 +46,7 @@
 
                     <div class="form-group">
                         <div class="col-md-12 text-center">
-                            <?php echo $formContact->submit('mailform'); ?>
+                            <?php echo $formContact->submit('mailform', 'Envoyer'); ?>
                         </div>
                     </div>
                 </fieldset>

@@ -81,6 +81,9 @@ class FrontendController
      */
     public function connexion()
     {
+        $chapterManager = new ChapterManager;
+        $chapters = $chapterManager->getList();
+
         $formContact = new Form($_POST);
         if (!empty($_POST)) {
             $validation = true;
@@ -120,6 +123,8 @@ class FrontendController
     // Affiche un chapitre avec ces commentaires
     public function single()
     {
+        $formContact = new Form($_POST);
+
         if (empty($_GET['chapter_id'])) {
             $_SESSION['error'] = "URL invalide";
             return header('Location: index.php?action=home');

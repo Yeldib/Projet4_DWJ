@@ -1,5 +1,6 @@
 /*------------------ Colors -----------------*/
 /*------------------ Fonts -----------------*/
+/*------------------ Shadow -----------------*/
 /* ----------------------------------- BODY ----------------------------*/
 #bg-img-body {
   background: url("../../public/images/pen.jpg") fixed;
@@ -13,10 +14,14 @@
 #bg-navbar-frontview {
   background-color: #21201ee6;
 }
+#bg-navbar-frontview a,
+#bg-navbar-frontview button {
+  font-family: "Roboto", sans-serif;
+}
 
 /* ------------------------------ PAGE home.php ---------------------------------*/
 .hero-image {
-  background-image: linear-gradient(rgba(202, 201, 201, 0.411), rgba(0, 0, 0, 0.705)), url("../../public/images/img_couv.jpg");
+  background-image: linear-gradient(rgba(202, 201, 201, 0.411), rgba(0, 0, 0, 0.705)), url("../../public/images/hero.jpg");
   height: 450px;
   opacity: 0.9;
   background-position: center;
@@ -29,8 +34,8 @@
 }
 .hero-image #h1-title-home {
   color: white;
-  /* font-family: 'Meddon', cursive; */
   text-shadow: 1px 2px 2px black;
+  font-family: "Roboto", sans-serif;
   letter-spacing: 1px;
   text-align: center;
   width: 100%;
@@ -38,7 +43,6 @@
   top: 40%;
   left: 50%;
   transform: translate(-50%, -50%);
-  color: white;
 }
 .hero-image #h1-title-home em {
   font-size: 1.2rem;
@@ -51,6 +55,7 @@
 
 #h2-title-home {
   color: white;
+  font-family: "Roboto", sans-serif;
   text-align: center;
   text-shadow: 1px 2px 2px black;
   margin: 45px 15px;
@@ -59,9 +64,13 @@
 #bloc-list-chapters #list-chapters-home {
   background-color: white;
 }
+#bloc-list-chapters #list-chapters-home p,
+#bloc-list-chapters #list-chapters-home a,
+#bloc-list-chapters #list-chapters-home h3 {
+  font-family: "Roboto", sans-serif;
+}
 #bloc-list-chapters #position-num-chapter {
   font-family: "Meddon", cursive;
-  font-style: italic;
   font-size: 1.4rem;
   color: black;
   position: absolute;
@@ -83,7 +92,7 @@
   position: absolute;
   bottom: -4px;
   left: 99px;
-  color: #000000ad;
+  color: black;
 }
 
 /* ----------------------------- PAGE single.php ---------------------------------*/
@@ -93,6 +102,10 @@
 }
 #single-chapter #bg-color-single-chapter {
   background-color: #ffffffe8;
+}
+#single-chapter p,
+#single-chapter h3 {
+  font-family: "Roboto", sans-serif;
 }
 
 #bloc-form-comment {
@@ -107,20 +120,26 @@
 #bloc-form-comment #textaera-form-comment {
   resize: none;
 }
+#bloc-form-comment p {
+  font-family: "Roboto", sans-serif;
+}
 
 #bloc-comment {
-  background-color: #ffffff80;
+  background-color: #ffffffb5;
   margin: 0 auto;
   border-radius: 5px;
 }
+#bloc-comment p {
+  font-family: "Roboto", sans-serif;
+}
 #bloc-comment #info-no-comment {
   color: black;
-  text-shadow: 1px 2px 2px white;
-  font-size: 1.3rem;
-  margin-left: 45px;
+  text-align: center;
+  font-size: 1.2rem;
 }
 #bloc-comment #count-comment-reaction {
   color: black;
+  padding-top: 5px;
 }
 #bloc-comment #btn-report-comment {
   font-size: 0.7rem;
@@ -130,12 +149,26 @@
   font-size: 0.7rem;
 }
 
+#info-not-registered {
+  margin: 0 auto;
+  text-align: center;
+  padding: 10px 15px;
+  border-radius: 5px;
+  font-family: "Roboto", sans-serif;
+}
+
 /* ----------------------------- PAGE signUp.php ---------------------------------*/
 #form-connexion {
   margin-top: 170px;
   background-color: #ffffff87;
   border-radius: 5px;
   padding: 15px 10px;
+}
+#form-connexion h2 {
+  font-family: "Roboto", sans-serif;
+}
+#form-connexion p {
+  font-family: "Roboto", sans-serif;
 }
 @media screen and (max-width: 750px) {
   #form-connexion {
@@ -149,6 +182,12 @@
   background-color: #ffffff87;
   border-radius: 5px;
   padding: 15px 10px;
+}
+#form-register h2 {
+  font-family: "Roboto", sans-serif;
+}
+#form-register p {
+  font-family: "Roboto", sans-serif;
 }
 #form-register input:valid {
   border: 2px solid #29862e;
@@ -187,6 +226,7 @@
 .hero-image-author #h1-title-biography {
   text-align: center;
   position: absolute;
+  font-family: "Roboto", sans-serif;
   top: 33%;
   left: 74%;
   transform: translate(-50%, -50%);
@@ -210,12 +250,16 @@
   opacity: 0.7;
   border-radius: 5px;
   padding: 10px 10px;
+  font-family: "Roboto", sans-serif;
 }
 
 /* -------------------------- PAGE contactDev.php --------------------------------*/
 #form-contact-dev {
   margin-top: 100px;
   margin-left: 120px;
+}
+#form-contact-dev p {
+  font-family: "Roboto", sans-serif;
 }
 #form-contact-dev i {
   font-size: 1.4rem;
@@ -232,6 +276,9 @@
 #form-contact-author {
   margin-top: 100px;
   margin-left: 120px;
+}
+#form-contact-author p {
+  font-family: "Roboto", sans-serif;
 }
 #form-contact-author i {
   font-size: 1.4rem;
@@ -263,9 +310,12 @@
   margin-top: 135px;
   color: black;
 }
+#bloc-footer p {
+  font-family: "Roboto", sans-serif;
+}
 #bloc-footer .text-footer {
   color: white;
-  text-shadow: 1px 1px 2px black;
+  text-shadow: 1px 2px 2px black;
 }
 @media screen and (max-width: 680px) {
   #bloc-footer {
@@ -281,6 +331,9 @@
   animation-name: flashMessage;
   animation-duration: 1.1s;
   animation-fill-mode: forwards;
+}
+.flash-msg p {
+  font-family: "Roboto", sans-serif;
 }
 .flash-msg .close {
   position: absolute;

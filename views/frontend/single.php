@@ -16,26 +16,31 @@
 </div>
 
 <!-- Formulaire commentaires -->
-<div class="row">
-    <form id="bloc-form-comment" method="POST">
-        <div id="comment-form" class="form-group">
-            <p>Votre avis m'intéresse, n'hésitez pas à commenter.</p>
-            <p>
+<?php if (isset($_SESSION['id'])) { ?>
+    <div class="row">
+        <form id="bloc-form-comment" method="POST">
+            <div id="comment-form" class="form-group">
+                <p>Votre avis m'intéresse, n'hésitez pas à commenter.</p>
+
                 <label for="author">Pseudo</label>
-                <input type="text" class="form-control" name="author" value="<?php if (isset($_SESSION['pseudo'])) {
-                                                                                    echo $_SESSION['pseudo'];
-                                                                                }  ?>">
-            </p>
-            <p>
+                <?php
+                echo $formContact->inputSession("author", "text", $_SESSION['pseudo']);
+                // echo $formContact->input("author", "text"); 
+                ?>
+
                 <label for="comment">Votre commentaire</label>
-                <textarea id="textaera-form-comment" rows="5" name="comment" class="form-control"></textarea>
-            </p>
-            <p>
-                <input type="submit" class="btn btn-primary btn-sm" value="Poster votre message"><br />
-            </p>
-        </div>
-    </form>
-</div>
+                <?php echo $formContact->textArea('comment', 'Votre message.') ?>
+
+                <?php echo $formContact->submit("send", "Poster votre message") ?>
+            </div>
+        </form>
+    </div>
+<?php } else { ?>
+    <div id="info-not-registered">
+        <p>Il faut être <a href="index.php?action=register">inscrit</a> pour commenter. </p>
+    </div>
+<?php } ?>
+
 
 <!-- affiche la liste des commentaires d'un chapitre -->
 <div class="row">

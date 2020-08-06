@@ -35,12 +35,17 @@ class Form
      */
     public function input($name, $type, $placeholder = "")
     {
-        return $this->surround('<input required id="lname" name="' . $name . '" type="' . $type . '" placeholder="' . $placeholder . '" class="form-control" value="' . $this->getValue($name) . '">');;
+        return $this->surround('<input required id="lname" name="' . $name . '" type="' . $type . '" placeholder="' . $placeholder . '" class="form-control" value="' . $this->getValue($name) . '">');
+    }
+
+    public function inputSession($name, $type, $value)
+    {
+        return $this->surround('<input required id="lname" name="' . $name . '" type="' . $type . '"  class="form-control" value="' . $value . '">');
     }
 
     public function textArea($name, $placeholder)
     {
-        return $this->surround('<textarea class="form-control" name="' . $name . '" placeholder="' . $placeholder . '" rows="7"></textarea>');
+        return $this->surround('<textarea required class="form-control" name="' . $name . '" placeholder="' . $placeholder . '" rows="7"></textarea>');
     }
 
 

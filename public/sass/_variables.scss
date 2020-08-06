@@ -1,14 +1,46 @@
 /*------------------ Colors -----------------*/
 // Color primary & secondary
+$colorPrimary: black;
+$colorSecondary: white;
 
-// Font-color
+// Font-color Title
+$h2TitleColor: white;
+$h1TitleColor:white;
+
+// Font-color Text
+$textColor:black;
 
 // Background-color
 $bgColorListChapters : white;
+$bgColorNavBar : #21201ee6;
+$bgColorForm : #ffffffb5;
 
 /*------------------ Fonts -----------------*/
-// Font-size
+// Font-family Title
+$fontFamilyH1: 'Roboto',
+sans-serif;
+
+$fontFamilyH2: 'Roboto',
+sans-serif;
+
+// Font-family Text
+$fontFamilyText: 'Roboto',
+sans-serif;
+;
+
+// Special Font
+$fontFamilyThumbnail:"Meddon",
+cursive;
+
+// Font-size Title 
+
+// Font-size Text 
+$fontSizeThumbnail: 1.4rem;
+
+// Font-size i
+$iFontSize: 1.4rem;
 
 // Margin & Padding
 
-// Shadow
+/*------------------ Shadow -----------------*/
+$textShadow: 1px 2px 2px black;
