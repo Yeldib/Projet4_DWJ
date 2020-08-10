@@ -8,7 +8,7 @@
             <h2 class="mb-3">Inscription</h2>
 
             <label for="pseudo">Pseudo</label>
-            <?php echo $formContact->input('pseudo', 'text', 'Choisissez un pseudonyme'); ?>
+            <?php echo $formContact->input('pseudo', 'text', 'Le pseudonyme doit contenir entre 4 et 15 caractères.'); ?>
 
             <label for="email">Votre email</label>
             <?php echo $formContact->input('email', 'email', 'Ex: mail@gmail.com') ?>

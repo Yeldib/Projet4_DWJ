@@ -40,16 +40,20 @@ class FrontendController
                 if (empty($userManager->isPseudoExist($_POST['pseudo']))) {
                     if (empty($userManager->isEmailExist($_POST['email']))) {
                         if (preg_match('#^(?=.*[a-z])(?=.*[A-Z])(?=.*\W).{8,}$#', $_POST['pass'])) {
-                            $passHash = password_hash($_POST['pass'], PASSWORD_DEFAULT);
-                            $userPseudo = strip_tags($_POST['pseudo']);
-                            $userMail = strip_tags($_POST['email']);
-                            $user = new User([
-                                'pseudo' => $userPseudo,
-                                'pass' => $passHash,
-                                'email' => $userMail
-                            ]);
-                            $userManager->add($user);
-                            $emailManager->sendMailRegister($_POST['email'], $_POST['pseudo']);
+                            if (preg_match('#^[a-zA-Z0-9_]{4,15}$#', $_POST['pseudo'])) {
+                                $passHash = password_hash($_POST['pass'], PASSWORD_DEFAULT);
+                                $userPseudo = strip_tags($_POST['pseudo']);
+                                $userMail = strip_tags($_POST['email']);
+                                $user = new User([
+                                    'pseudo' => $userPseudo,
+                                    'pass' => $passHash,
+                                    'email' => $userMail
+                                ]);
+                                $userManager->add($user);
+                                $emailManager->sendMailRegister($_POST['email'], $_POST['pseudo']);
+                            } else {
+                                $_SESSION['error'] = "Pseudonyme non conforme";
+                            }
                         } else {
                             $_SESSION['error'] = "Mot de passe non conforme";
                         }
