@@ -8,15 +8,15 @@
 
         <form method="post">
             <div class="form-group">
-                <p><label for="num-chapitre">Numéro du chapitre</label>
-                    <input type="text" name="num_chapter" placeholder="ex: Chapitre 1" class="form-control"></p>
+                <label for="num-chapitre">Numéro du chapitre</label>
+                <?php echo $formContact->input("num_chapter", "text", "ex: Chapitre 1") ?>
             </div>
             <div class="form-group">
-                <p><label for="titre">Titre du chapitre</label>
-                    <input type="text" name="title" class="form-control"></p>
+                <label for="title">Titre du chapitre</label>
+                <?php echo $formContact->input("title", "text") ?>
             </div>
             <div class="form-group">
-                <textarea id="mytextarea" name="content" placeholder="Contenu...."></textarea>
+                <?php echo $formContact->textArea("content", "Contenu...") ?>
             </div>
 
             <p><input type="submit" name="sendChapter" value="Publication" class="btn btn-primary"></p>

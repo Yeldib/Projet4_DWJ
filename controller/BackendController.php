@@ -49,6 +49,7 @@ class BackendController
      */
     public function create()
     {
+        $formContact = new Form($_POST);
         // Ajout d'un chapitre avec des vérifications
         if (!empty($_POST)) {
             if (
